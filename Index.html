@@ -1,0 +1,3185 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تی‌اِیت شاپ — نسخه نهایی</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<style>
+:root{
+  --bg:#0d0d0f;--card:#16161a;--hover:#1e1e24;--text:#e8e8ea;--muted:#9a9aa0;
+  --accent:#e63946;--accent2:#ff4757;--gold:#f4a261;--green:#10b981;
+  --blue:#3b82f6;--purple:#8b5cf6;--border:#26262d;--radius:12px;
+  --shadow:0 10px 30px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Vazirmatn",Tahoma,sans-serif;background:var(--bg);color:var(--text);
+  line-height:1.8;direction:rtl;overflow-x:hidden}
+a{color:inherit;text-decoration:none;transition:.2s}
+button,input,select,textarea{font-family:inherit}
+button{cursor:pointer;border:none;background:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1280px;margin:0 auto;padding:0 20px}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:var(--radius);
+  font-weight:600;font-size:14px;transition:.25s;cursor:pointer;border:none;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 8px 20px rgba(230,57,70,.4)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-ghost{background:var(--card);color:var(--text)}
+.btn-ghost:hover{background:var(--hover)}
+.btn-danger{background:#7f1d1d;color:#fff}
+.btn-danger:hover{background:#991b1b}
+.btn-success{background:var(--green);color:#fff}
+.btn-success:hover{background:#059669}
+.btn-info{background:var(--blue);color:#fff}
+.btn-info:hover{background:#2563eb}
+.btn-purple{background:var(--purple);color:#fff}
+.btn-purple:hover{background:#7c3aed}
+.btn-sm{padding:7px 14px;font-size:13px}
+.btn-xs{padding:4px 10px;font-size:11px}
+.btn-icon{padding:8px;width:34px;height:34px;justify-content:center}
+.btn-block{width:100%;justify-content:center}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+.input,.textarea,.select{width:100%;background:var(--bg);color:var(--text);
+  border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;transition:.2s}
+.input:focus,.textarea:focus,.select:focus{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(230,57,70,.15)}
+.textarea{resize:vertical;min-height:100px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;margin-bottom:8px;font-size:14px;font-weight:600}
+.form-hint{font-size:12px;color:var(--muted);margin-top:6px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.form-row{grid-template-columns:1fr}}
+
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;
+  font-weight:600;background:var(--card);color:var(--muted)}
+.badge-green{background:rgba(16,185,129,.15);color:#34d399}
+.badge-red{background:rgba(230,57,70,.15);color:#f87171}
+.badge-gold{background:rgba(244,162,97,.15);color:var(--gold)}
+.badge-blue{background:rgba(59,130,246,.15);color:#60a5fa}
+.badge-purple{background:rgba(139,92,246,.15);color:#a78bfa}
+
+.top-bar{background:#000;color:var(--muted);font-size:13px;padding:8px 0;border-bottom:1px solid var(--border)}
+.top-bar .container{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.top-bar i{color:var(--accent);margin-left:5px}
+.top-bar .sep{margin:0 12px;opacity:.3}
+.top-bar-social a{margin-right:12px;font-size:15px}
+
+.site-header{background:rgba(22,22,26,.95);border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:50;backdrop-filter:blur(10px)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:20px}
+.logo{font-size:24px;font-weight:900;display:flex;align-items:center;gap:10px}
+.logo i{color:var(--accent);font-size:30px}
+.logo span{color:var(--accent)}
+.main-nav ul{display:flex;gap:26px;list-style:none}
+.main-nav a{font-weight:500;font-size:15px;position:relative;padding-bottom:4px}
+.main-nav a:hover,.main-nav a.active{color:var(--accent)}
+.main-nav a.active::after{content:"";position:absolute;bottom:-6px;right:0;left:0;height:2px;
+  background:var(--accent);border-radius:2px}
+.header-actions{display:flex;gap:14px;align-items:center}
+.header-actions .icon-btn{position:relative;font-size:20px;color:var(--text)}
+.header-actions .icon-btn:hover{color:var(--accent)}
+.badge-count{position:absolute;top:-6px;left:-8px;background:var(--accent);color:#fff;
+  font-size:11px;font-weight:700;padding:1px 6px;border-radius:10px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.mobile-toggle{display:none;font-size:24px}
+@media(max-width:900px){.main-nav{display:none}.mobile-toggle{display:block}}
+
+.hero{padding:70px 0 90px;background:radial-gradient(ellipse at 80% 20%,rgba(230,57,70,.15),transparent 60%),
+  radial-gradient(ellipse at 20% 80%,rgba(244,162,97,.08),transparent 60%),linear-gradient(180deg,#0d0d0f,#16161a)}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.hero h1{font-size:50px;font-weight:900;line-height:1.3;margin-bottom:18px}
+.hero h1 span{color:var(--accent);display:block}
+.hero p{color:var(--muted);font-size:16px;margin-bottom:28px;max-width:520px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-visual{position:relative;height:400px}
+.floating-card{position:absolute;background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);animation:float 4s ease-in-out infinite}
+.floating-card:nth-child(1){top:20px;right:20px;width:220px}
+.floating-card:nth-child(2){bottom:40px;left:0;width:250px;animation-delay:1.5s}
+.floating-card:nth-child(3){top:50%;right:40%;width:170px;animation-delay:3s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.fc-product{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.fc-product:last-child{margin-bottom:0}
+.fc-img{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-size:22px;flex-shrink:0;overflow:hidden}
+.fc-img img{width:100%;height:100%;object-fit:cover}
+.fc-title{font-size:13px;font-weight:600}
+.fc-price{font-size:12px;color:var(--gold);font-weight:700}
+.fc-stars{color:var(--gold);font-size:12px}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.hero h1{font-size:34px}
+  .hero-visual{height:320px}.floating-card:nth-child(3){display:none}}
+
+.section{padding:70px 0}
+.section-head{text-align:center;margin-bottom:45px}
+.section-head h2{font-size:32px;font-weight:800;margin-bottom:10px}
+.section-head h2 span{color:var(--accent)}
+.section-head p{color:var(--muted);font-size:15px}
+
+.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.category-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:32px 20px;text-align:center;transition:.3s;cursor:pointer}
+.category-card:hover{transform:translateY(-6px);border-color:var(--accent);background:var(--hover)}
+.category-icon{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:28px;margin:0 auto 14px;color:#fff}
+.category-card h3{font-size:15px;font-weight:700;margin-bottom:4px}
+.category-card span{font-size:13px;color:var(--muted)}
+@media(max-width:900px){.category-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.category-grid{grid-template-columns:1fr}}
+
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;transition:.3s;position:relative}
+.product-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:var(--shadow)}
+.product-badge{position:absolute;top:14px;right:14px;background:var(--accent);color:#fff;
+  font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;z-index:2}
+.product-badge.sale{background:var(--gold);color:#000}
+.product-img{height:210px;background:linear-gradient(135deg,#1e1e24,#2a2a35);
+  display:flex;align-items:center;justify-content:center;font-size:76px;color:var(--muted);
+  transition:.4s;overflow:hidden;cursor:pointer}
+.product-img img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.product-card:hover .product-img{color:var(--accent)}
+.product-card:hover .product-img img{transform:scale(1.08)}
+.product-info{padding:16px}
+.product-info h3{font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.5;cursor:pointer}
+.product-stars{color:var(--gold);font-size:12px;margin-bottom:10px}
+.product-price{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.price{font-size:16px;font-weight:800;color:var(--accent)}
+.price del{font-size:12px;color:var(--muted);font-weight:400;margin-right:6px}
+.add-to-cart{width:36px;height:36px;border-radius:50%;background:var(--bg);
+  border:1px solid var(--border);color:var(--text);display:flex;align-items:center;
+  justify-content:center;font-size:16px;transition:.3s}
+.add-to-cart:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+@media(max-width:900px){.products-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.products-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.products-grid{grid-template-columns:1fr}}
+
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.blog-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;transition:.3s;cursor:pointer}
+.blog-card:hover{transform:translateY(-6px);border-color:var(--accent)}
+.blog-thumb{height:180px;background:linear-gradient(135deg,#2a2a35,#1e1e24);
+  display:flex;align-items:center;justify-content:center;font-size:60px;color:var(--accent)}
+.blog-body{padding:20px}
+.blog-meta{font-size:12px;color:var(--muted);margin-bottom:10px;display:flex;gap:14px;flex-wrap:wrap}
+.blog-meta i{color:var(--accent)}
+.blog-body h3{font-size:16px;font-weight:700;margin-bottom:10px;line-height:1.6}
+.blog-body p{font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.8}
+.read-more{color:var(--accent);font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:4px}
+@media(max-width:900px){.blog-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.blog-grid{grid-template-columns:1fr}}
+
+.newsletter{padding:60px 0;background:linear-gradient(135deg,var(--accent),#8b0000);text-align:center}
+.newsletter h2{font-size:28px;font-weight:800;margin-bottom:10px;color:#fff}
+.newsletter p{color:rgba(255,255,255,.9);margin-bottom:24px}
+.newsletter-form{max-width:500px;margin:0 auto;display:flex;gap:8px;background:#fff;
+  padding:8px;border-radius:60px}
+.newsletter-form input{flex:1;border:none;outline:none;padding:12px 20px;
+  background:transparent;font-size:14px;color:#000}
+.newsletter-form button{border:none;background:#000;color:#fff;padding:12px 26px;
+  border-radius:60px;font-weight:700;font-size:14px}
+@media(max-width:520px){.newsletter-form{flex-direction:column;border-radius:12px}
+  .newsletter-form button{border-radius:8px}}
+
+.site-footer{background:#000;border-top:1px solid var(--border);padding:60px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:40px;
+  padding-bottom:50px;border-bottom:1px solid var(--border)}
+.footer-col h3{font-size:16px;font-weight:800;margin-bottom:20px;position:relative;padding-bottom:10px}
+.footer-col h3::after{content:"";position:absolute;bottom:0;right:0;width:36px;
+  height:3px;background:var(--accent);border-radius:3px}
+.footer-col p,.footer-col a{color:var(--muted);font-size:13px;display:block;margin-bottom:10px}
+.footer-col a:hover{color:var(--accent)}
+.footer-col .contact-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;
+  color:var(--muted);font-size:13px}
+.footer-col .contact-item i{color:var(--accent);font-size:16px;margin-top:4px}
+.footer-social{display:flex;gap:10px;margin-top:16px}
+.footer-social a{width:38px;height:38px;border-radius:50%;background:var(--card);
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+  color:var(--text);font-size:17px;margin:0}
+.footer-social a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.footer-bottom{padding:20px 0;text-align:center;font-size:12px;color:var(--muted)}
+.footer-bottom a{color:var(--accent)}
+@media(max-width:900px){.footer-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.footer-grid{grid-template-columns:1fr}}
+
+.back-to-top{position:fixed;bottom:26px;left:26px;width:48px;height:48px;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:20px;display:flex;align-items:center;
+  justify-content:center;opacity:0;visibility:hidden;transition:.3s;z-index:90;
+  box-shadow:0 6px 20px rgba(230,57,70,.4)}
+.back-to-top.show{opacity:1;visibility:visible}
+.back-to-top:hover{transform:translateY(-4px)}
+
+.toast{position:fixed;bottom:26px;right:26px;background:var(--card);
+  border:1px solid var(--border);border-right:4px solid var(--accent);
+  padding:14px 20px;border-radius:10px;box-shadow:var(--shadow);
+  z-index:200;transform:translateX(-400px);transition:.3s;max-width:340px}
+.toast.show{transform:translateX(0)}
+.toast-success{border-right-color:var(--green)}
+.toast-error{border-right-color:var(--accent)}
+.toast-info{border-right-color:var(--blue)}
+
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at center,rgba(230,57,70,.15),transparent 70%),var(--bg);padding:20px}
+.login-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:40px;width:100%;max-width:420px;box-shadow:var(--shadow)}
+.login-card .logo{justify-content:center;margin-bottom:8px;font-size:26px}
+.login-card .sub{text-align:center;color:var(--muted);font-size:13px;margin-bottom:30px}
+.login-card .hint{background:var(--bg);padding:12px;border-radius:10px;font-size:12px;
+  color:var(--muted);margin-top:16px;text-align:center;line-height:2}
+.login-card .hint code{background:var(--card);padding:2px 6px;border-radius:4px;color:var(--gold)}
+
+.admin-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.admin-sidebar{background:var(--card);border-left:1px solid var(--border);padding:24px 0;
+  position:sticky;top:0;height:100vh;overflow-y:auto}
+.admin-sidebar .brand{padding:0 24px 24px;font-size:20px;font-weight:900;display:flex;
+  align-items:center;gap:10px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.admin-sidebar .brand i{color:var(--accent);font-size:26px}
+.admin-nav{list-style:none;padding:0 12px}
+.admin-nav a{display:flex;align-items:center;gap:12px;padding:11px 16px;border-radius:10px;
+  color:var(--muted);font-size:14px;font-weight:500;margin-bottom:4px;position:relative}
+.admin-nav a:hover{background:var(--hover);color:var(--text)}
+.admin-nav a.active{background:var(--accent);color:#fff}
+.admin-nav a i{font-size:18px;width:22px;text-align:center}
+.admin-nav .divider{height:1px;background:var(--border);margin:14px 12px}
+.admin-nav .count-pill{position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  background:var(--accent);color:#fff;font-size:10px;font-weight:700;
+  padding:1px 6px;border-radius:10px}
+.admin-main{background:var(--bg);padding:30px;min-height:100vh}
+.admin-header{display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:30px;gap:16px;flex-wrap:wrap}
+.admin-header h1{font-size:24px;font-weight:800}
+.admin-header p{color:var(--muted);font-size:13px;margin-top:4px}
+.admin-user{display:flex;align-items:center;gap:12px;background:var(--card);
+  padding:8px 16px;border-radius:30px;border:1px solid var(--border)}
+.admin-user-avatar{width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--gold));
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff}
+@media(max-width:900px){.admin-layout{grid-template-columns:1fr}
+  .admin-sidebar{position:static;height:auto}}
+
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:30px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px;position:relative;overflow:hidden}
+.stat-card::before{content:"";position:absolute;top:0;right:0;width:4px;height:100%;background:var(--accent)}
+.stat-card.green::before{background:var(--green)}
+.stat-card.blue::before{background:var(--blue)}
+.stat-card.purple::before{background:var(--purple)}
+.stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:22px;margin-bottom:14px;
+  background:rgba(230,57,70,.15);color:var(--accent)}
+.stat-card.green .stat-icon{background:rgba(16,185,129,.15);color:var(--green)}
+.stat-card.blue .stat-icon{background:rgba(59,130,246,.15);color:var(--blue)}
+.stat-card.purple .stat-icon{background:rgba(139,92,246,.15);color:var(--purple)}
+.stat-value{font-size:26px;font-weight:900;margin-bottom:4px}
+.stat-label{font-size:13px;color:var(--muted)}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.stats-grid{grid-template-columns:1fr}}
+
+.panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px;margin-bottom:24px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:20px;gap:14px;flex-wrap:wrap}
+.panel-head h2{font-size:18px;font-weight:800}
+.panel-head p{font-size:13px;color:var(--muted);margin-top:4px}
+
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead{background:var(--bg)}
+th,td{padding:14px 16px;text-align:right;border-bottom:1px solid var(--border)}
+th{font-weight:700;font-size:13px;color:var(--muted)}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--hover)}
+.table-product{display:flex;align-items:center;gap:12px}
+.table-product-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-size:22px;background:linear-gradient(135deg,#2a2a35,#1e1e24);
+  color:var(--accent);flex-shrink:0;overflow:hidden}
+.table-product-icon img{width:100%;height:100%;object-fit:cover}
+.row-actions{display:flex;gap:6px;flex-wrap:wrap}
+
+.empty{text-align:center;padding:50px 20px;color:var(--muted)}
+.empty i{font-size:60px;color:var(--border);display:block;margin-bottom:16px}
+.empty h3{color:var(--text);font-size:18px;margin-bottom:8px}
+
+.page-hero{padding:50px 0 30px;border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,#0d0d0f,#16161a)}
+.page-hero h1{font-size:32px;font-weight:800;margin-bottom:8px}
+.breadcrumb{display:flex;gap:8px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.breadcrumb a:hover{color:var(--accent)}
+
+.product-detail{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.product-detail-img{height:420px;background:linear-gradient(135deg,#1e1e24,#2a2a35);
+  border-radius:var(--radius);display:flex;align-items:center;justify-content:center;
+  font-size:140px;color:var(--accent);border:1px solid var(--border);overflow:hidden}
+.product-detail-img img{width:100%;height:100%;object-fit:cover}
+.product-detail h1{font-size:28px;font-weight:900;margin-bottom:14px}
+.product-detail .price-big{font-size:32px;font-weight:900;color:var(--accent);margin:18px 0}
+.product-detail .price-big del{font-size:18px;color:var(--muted);font-weight:400;margin-right:12px}
+.product-detail p.desc{color:var(--muted);line-height:2;margin-bottom:22px}
+@media(max-width:900px){.product-detail{grid-template-columns:1fr}}
+
+.post-detail{max-width:800px;margin:0 auto}
+.post-detail h1{font-size:32px;font-weight:900;margin-bottom:18px;line-height:1.4}
+.post-detail .post-meta{display:flex;gap:20px;color:var(--muted);font-size:13px;
+  margin-bottom:30px;padding-bottom:22px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.post-detail .post-meta i{color:var(--accent);margin-left:5px}
+.post-detail .content{font-size:16px;line-height:2.2;color:#d0d0d5}
+
+.admin-mobile-toggle{display:none;font-size:24px;background:var(--card);
+  border:1px solid var(--border);padding:8px 14px;border-radius:10px;color:var(--text)}
+@media(max-width:900px){.admin-mobile-toggle{display:inline-flex}
+  .admin-sidebar{display:none}.admin-sidebar.open{display:block}}
+
+.img-upload{position:relative;border:2px dashed var(--border);border-radius:var(--radius);
+  padding:20px;text-align:center;cursor:pointer;transition:.3s;background:var(--bg);min-height:180px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.img-upload:hover{border-color:var(--accent);background:var(--hover)}
+.img-upload input[type="file"]{display:none}
+.img-upload .u-icon{font-size:40px;color:var(--muted)}
+.img-upload .u-text{color:var(--muted);font-size:13px}
+.img-preview{margin-top:12px}
+.img-preview img{max-height:180px;border-radius:12px;border:1px solid var(--border)}
+.remove-img{color:#f87171;font-size:12px;cursor:pointer;margin-top:8px;display:inline-block}
+
+.cart-layout{display:grid;grid-template-columns:2fr 1fr;gap:24px}
+@media(max-width:900px){.cart-layout{grid-template-columns:1fr}}
+.cart-item{display:grid;grid-template-columns:90px 1fr auto;gap:16px;align-items:center;
+  padding:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  margin-bottom:12px}
+.cart-item-img{width:90px;height:90px;border-radius:10px;background:linear-gradient(135deg,#2a2a35,#1e1e24);
+  display:flex;align-items:center;justify-content:center;font-size:38px;color:var(--accent);overflow:hidden}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
+.cart-item-info h4{font-size:15px;font-weight:700;margin-bottom:6px}
+.cart-item-info .p-price{font-size:14px;color:var(--accent);font-weight:800}
+.qty-box{display:flex;align-items:center;gap:8px;margin-top:8px}
+.qty-btn{width:30px;height:30px;border-radius:8px;background:var(--bg);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;transition:.2s}
+.qty-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.qty-num{min-width:32px;text-align:center;font-weight:700}
+.cart-item-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.cart-remove{color:#f87171;font-size:18px;cursor:pointer;padding:6px}
+.cart-summary{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px;position:sticky;top:100px;height:fit-content}
+.cart-summary h2{font-size:18px;font-weight:800;margin-bottom:20px;padding-bottom:14px;
+  border-bottom:1px solid var(--border)}
+.summary-row{display:flex;justify-content:space-between;padding:10px 0;font-size:14px;color:var(--muted)}
+.summary-row.total{font-size:18px;font-weight:900;color:var(--accent);
+  border-top:1px solid var(--border);margin-top:10px;padding-top:16px}
+.cart-empty{text-align:center;padding:80px 20px}
+.cart-empty i{font-size:80px;color:var(--border);display:block;margin-bottom:20px}
+
+.checkout-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:24px}
+@media(max-width:900px){.checkout-layout{grid-template-columns:1fr}}
+.payment-methods{display:grid;gap:12px}
+.payment-option{border:1.5px solid var(--border);border-radius:var(--radius);padding:16px;
+  cursor:pointer;transition:.2s;display:flex;align-items:center;gap:12px}
+.payment-option:hover{border-color:var(--accent);background:var(--hover)}
+.payment-option.selected{border-color:var(--accent);background:rgba(230,57,70,.08)}
+.payment-option input{accent-color:var(--accent)}
+.payment-option i{font-size:24px;color:var(--accent)}
+
+.success-page{max-width:600px;margin:60px auto;text-align:center;padding:0 20px}
+.success-icon{width:120px;height:120px;border-radius:50%;background:rgba(16,185,129,.15);
+  color:var(--green);font-size:60px;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 30px;animation:pop .5s ease-out}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.1)}100%{transform:scale(1)}}
+.success-page h1{font-size:32px;font-weight:900;margin-bottom:12px}
+.success-page p{color:var(--muted);margin-bottom:30px}
+.order-info{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px;text-align:right;margin-bottom:30px}
+.order-info .row{display:flex;justify-content:space-between;padding:10px 0;
+  border-bottom:1px solid var(--border)}
+.order-info .row:last-child{border-bottom:none;font-weight:800;color:var(--accent)}
+
+.charts-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:24px}
+@media(max-width:900px){.charts-grid{grid-template-columns:1fr}}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.chart-card h3{font-size:16px;font-weight:800;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.chart-card h3 i{color:var(--accent)}
+.chart-container{position:relative;height:280px}
+
+tr.editing{background:rgba(230,57,70,.05)}
+tr.editing td{padding:8px 10px}
+.inline-input{background:var(--bg);color:var(--text);border:1.5px solid var(--accent);
+  border-radius:8px;padding:6px 10px;font-size:13px;width:100%;min-width:80px}
+.inline-input:focus{outline:none;box-shadow:0 0 0 3px rgba(230,57,70,.15)}
+.inline-num{max-width:110px}
+.inline-save-bar{display:flex;gap:6px;justify-content:flex-end}
+
+.filters-bar{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:12px;
+  padding:18px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);
+  margin-bottom:20px;align-items:end}
+@media(max-width:900px){.filters-bar{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.filters-bar{grid-template-columns:1fr}}
+.filter-item label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:600}
+.filter-item .input,.filter-item .select{padding:9px 12px;font-size:13px}
+.filter-actions{display:flex;gap:8px;flex-wrap:wrap}
+.results-info{font-size:13px;color:var(--muted);margin-bottom:14px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+
+.role-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;
+  border-radius:20px;font-size:12px;font-weight:700}
+.role-admin{background:rgba(230,57,70,.15);color:#f87171}
+.role-editor{background:rgba(59,130,246,.15);color:#60a5fa}
+.role-viewer{background:rgba(156,163,175,.15);color:#9ca3af}
+
+.backup-item{display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:14px 18px;background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  margin-bottom:10px;flex-wrap:wrap}
+.backup-meta{flex:1;min-width:200px}
+.backup-meta strong{display:block;font-size:14px;margin-bottom:4px}
+.backup-meta small{color:var(--muted);font-size:12px}
+.backup-actions{display:flex;gap:8px}
+.auto-badge{background:rgba(16,185,129,.15);color:#34d399;font-size:11px;
+  padding:2px 8px;border-radius:10px;font-weight:700;margin-right:8px}
+
+/* Modals */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);
+  z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;transition:.25s}
+.modal-overlay.show{opacity:1}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:16px;
+  width:100%;max-width:560px;max-height:90vh;overflow:auto;box-shadow:var(--shadow);
+  transform:scale(.92);transition:.25s}
+.modal-overlay.show .modal-box{transform:scale(1)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;
+  border-bottom:1px solid var(--border)}
+.modal-head h3{font-size:17px;font-weight:800}
+.modal-close{font-size:20px;color:var(--muted);width:32px;height:32px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;transition:.2s}
+.modal-close:hover{background:var(--hover);color:var(--text)}
+.modal-body{padding:24px}
+.modal-foot{display:flex;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--border)}
+
+/* Barcode Scanner */
+#qrReader{border-radius:12px;overflow:hidden;background:#000}
+#qrReader video{border-radius:12px}
+.scanner-frame{position:relative}
+.scan-overlay{position:absolute;inset:0;pointer-events:none;
+  display:flex;align-items:center;justify-content:center}
+.scan-target{width:260px;height:160px;border:3px solid var(--accent);border-radius:14px;
+  box-shadow:0 0 0 9999px rgba(0,0,0,.4);animation:scanPulse 1.8s ease-in-out infinite}
+@keyframes scanPulse{0%,100%{border-color:var(--accent)}50%{border-color:var(--gold)}}
+
+/* Cron status */
+.cron-status{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);
+  padding:8px 14px;background:var(--bg);border-radius:20px;border:1px solid var(--border)}
+.cron-dot{width:8px;height:8px;border-radius:50%;background:var(--green);
+  animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Email log */
+.email-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  padding:14px 18px;margin-bottom:10px;display:flex;justify-content:space-between;
+  align-items:flex-start;gap:14px;flex-wrap:wrap;cursor:pointer;transition:.2s}
+.email-item:hover{border-color:var(--accent);background:var(--hover)}
+.email-item.unread{border-right:4px solid var(--accent)}
+.email-meta{flex:1;min-width:200px}
+.email-meta strong{display:block;font-size:14px;margin-bottom:4px}
+.email-meta small{color:var(--muted);font-size:12px;display:block}
+.email-preview{background:#fff;color:#000;border-radius:12px;overflow:hidden;font-size:14px}
+.email-preview-head{background:linear-gradient(135deg,#e63946,#8b0000);color:#fff;padding:20px}
+.email-preview-body{padding:20px;line-height:1.9;white-space:pre-line}
+
+/* Cron log */
+.cron-log-item{padding:8px 14px;background:var(--bg);border-radius:8px;margin-bottom:6px;
+  font-size:12px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.cron-log-item .cl-time{color:var(--muted);font-family:monospace}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* ========================================================================
+   Storage
+   ======================================================================== */
+const STORAGE_KEY = 'the8shop_fa_data_v4';
+const CART_KEY    = 'the8shop_fa_cart_v1';
+const SESSION_KEY = 'the8shop_fa_session_v4';
+
+const DEFAULT_DATA = {
+  settings:{
+    siteName:'تی‌اِیت شاپ', tagline:'فروشگاهی مدرن با طعم ایرانی',
+    phone:'۰۲۱-۱۲۳۴۵۶۷۸', email:'info@the8shop.ir',
+    address:'تهران، خیابان ولیعصر، پلاک ۱۲۳',
+    instagram:'#', telegram:'#', whatsapp:'#', linkedin:'#',
+    copyright:'تمامی حقوق مادی و معنوی این سایت متعلق به تی‌اِیت شاپ می‌باشد © ۱۴۰۳',
+    autoBackup: true,
+    emailSender: 'no-reply@the8shop.ir'
+  },
+  users:[
+    { id:'u1', username:'admin', password:'admin', fullName:'مدیر اصلی',
+      role:'admin', email:'admin@the8shop.ir', createdAt:'۱۴۰۳/۰۷/۱۵', active:true },
+    { id:'u2', username:'editor', password:'editor', fullName:'نویسنده محتوا',
+      role:'editor', email:'editor@the8shop.ir', createdAt:'۱۴۰۳/۰۷/۱۵', active:true },
+    { id:'u3', username:'viewer', password:'viewer', fullName:'ناظر',
+      role:'viewer', email:'viewer@the8shop.ir', createdAt:'۱۴۰۳/۰۷/۱۵', active:true }
+  ],
+  categories:[
+    { id:'c1', name:'موبایل و تبلت', icon:'bi-phone', color:'#e63946', count:245 },
+    { id:'c2', name:'لپ‌تاپ و کامپیوتر', icon:'bi-laptop', color:'#f4a261', count:180 },
+    { id:'c3', name:'صوتی و تصویری', icon:'bi-headphones', color:'#8b5cf6', count:96 },
+    { id:'c4', name:'ساعت هوشمند', icon:'bi-smartwatch', color:'#10b981', count:72 }
+  ],
+  products:[
+    { id:'p1', name:'ساعت هوشمند مدل Pro Max', price:2850000, oldPrice:3200000,
+      categoryId:'c4', icon:'bi-smartwatch', image:'', badge:'جدید', badgeType:'new',
+      stars:4.5, description:'ساعت هوشمند با نمایشگر AMOLED، باتری ۷ روزه و پشتیبانی از تماس بلوتوثی.',
+      barcode:'T8S-P1-2850' },
+    { id:'p2', name:'هدفون بی‌سیم Noise Cancel', price:1240000, oldPrice:1550000,
+      categoryId:'c3', icon:'bi-headphones', image:'', badge:'٪۲۰ تخفیف', badgeType:'sale',
+      stars:4, description:'هدفون با حذف نویز فعال، ۳۰ ساعت پخش موسیقی.',
+      barcode:'T8S-P2-1240' },
+    { id:'p3', name:'گوشی هوشمند نسل جدید', price:15900000, oldPrice:0,
+      categoryId:'c1', icon:'bi-phone', image:'', badge:'', badgeType:'',
+      stars:5, description:'گوشی پرچمدار با دوربین ۱۰۸ مگاپیکسلی.',
+      barcode:'T8S-P3-15900' },
+    { id:'p4', name:'لپ‌تاپ حرفه‌ای Core i9', price:58000000, oldPrice:65000000,
+      categoryId:'c2', icon:'bi-laptop', image:'', badge:'٪۳۵ تخفیف', badgeType:'sale',
+      stars:4.5, description:'لپ‌تاپ حرفه‌ای با پردازنده Core i9.',
+      barcode:'T8S-P4-58000' }
+  ],
+  posts:[
+    { id:'b1', title:'راهنمای کامل خرید ساعت هوشمند در سال ۱۴۰۳',
+      excerpt:'در این مقاله شما را با ویژگی‌های مهم یک ساعت هوشمند خوب آشنا می‌کنیم...',
+      content:'در این مقاله قصد داریم شما را با ویژگی‌های مهم یک ساعت هوشمند خوب آشنا کنیم.',
+      author:'مریم احمدی', date:'۱۴۰۳/۰۷/۱۵', icon:'bi-lightbulb', comments:8 },
+    { id:'b2', title:'مقایسه هدفون‌های بی‌سیم: کدام یک ارزش خرید دارد؟',
+      excerpt:'اگر قصد خرید هدفون بی‌سیم دارید، این مقایسه جامع به شما کمک می‌کند...',
+      content:'مقایسه چند مدل محبوب از نظر کیفیت صدا، حذف نویز، عمر باتری و قیمت.',
+      author:'علی رضایی', date:'۱۴۰۳/۰۷/۱۲', icon:'bi-headphones', comments:3 },
+    { id:'b3', title:'پردازنده‌های نسل جدید چه تفاوتی با گذشته دارند؟',
+      excerpt:'تکنولوژی ساخت پردازنده‌ها پیشرفت چشمگیری داشته است...',
+      content:'بررسی معماری، لیتوگرافی و کارایی پردازنده‌های نسل جدید.',
+      author:'سارا کریمی', date:'۱۴۰۳/۰۷/۰۸', icon:'bi-cpu', comments:12 }
+  ],
+  orders:[
+    { id:'o1706001', customer:'رضا محمدی', phone:'۰۹۱۲۱۲۳۴۵۶۷', address:'تهران، ونک',
+      email:'reza@example.com',
+      total:2850000, status:'completed', date:'۱۴۰۳/۰۷/۱۵', method:'online',
+      items:[{ productId:'p1', name:'ساعت هوشمند', price:2850000, qty:1 }] },
+    { id:'o1706002', customer:'فاطمه حسینی', phone:'۰۹۳۵۱۲۳۴۵۶۷', address:'اصفهان',
+      email:'fateme@example.com',
+      total:1240000, status:'pending', date:'۱۴۰۳/۰۷/۱۴', method:'cod',
+      items:[{ productId:'p2', name:'هدفون بی‌سیم', price:1240000, qty:1 }] },
+    { id:'o1706003', customer:'امیر کریمی', phone:'۰۹۱۹۱۲۳۴۵۶۷', address:'مشهد',
+      email:'amir@example.com',
+      total:17400000, status:'shipped', date:'۱۴۰۳/۰۷/۱۳', method:'online',
+      items:[{ productId:'p3', name:'گوشی هوشمند', price:15900000, qty:1 },
+             { productId:'p2', name:'هدفون', price:1240000, qty:1 }] }
+  ],
+  salesHistory:[
+    { month:'اردیبهشت', amount:12500000 },
+    { month:'خرداد',   amount:18200000 },
+    { month:'تیر',     amount:15600000 },
+    { month:'مرداد',   amount:22800000 },
+    { month:'شهریور',  amount:28400000 },
+    { month:'مهر',     amount:32600000 }
+  ],
+  backups:[],
+  emails:[],
+  cronLog:[],
+  lastAutoBackup:null,
+  cronState:{ lastCheck:null, runCount:0, enabled:true }
+};
+
+function loadDB(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if(!raw){ localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_DATA));
+    return JSON.parse(JSON.stringify(DEFAULT_DATA)); }
+  try{
+    const d = JSON.parse(raw);
+    if(!d.users) d.users = DEFAULT_DATA.users;
+    if(!d.backups) d.backups = [];
+    if(!d.emails) d.emails = [];
+    if(!d.cronLog) d.cronLog = [];
+    if(!d.cronState) d.cronState = { lastCheck:null, runCount:0, enabled:true };
+    if(d.lastAutoBackup === undefined) d.lastAutoBackup = null;
+    if(d.settings.autoBackup === undefined) d.settings.autoBackup = true;
+    if(!d.settings.emailSender) d.settings.emailSender = 'no-reply@the8shop.ir';
+    return d;
+  }catch{ return JSON.parse(JSON.stringify(DEFAULT_DATA)); }
+}
+function saveDB(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(DB)); }
+function resetDB(){
+  if(!confirm('همه تغییرات حذف شود؟')) return;
+  localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(CART_KEY);
+  DB = loadDB(); cart = [];
+  sessionStorage.removeItem(SESSION_KEY);
+  toast('بازنشانی شد','success');
+  location.hash = '#/'; render();
+}
+let DB = loadDB();
+
+/* ========================================================================
+   Roles
+   ======================================================================== */
+const ROLES = {
+  admin:  { label:'مدیر کل', perms:{ products:'write', posts:'write', categories:'write',
+            orders:'write', users:'write', settings:'write', backups:'write', emails:'write' } },
+  editor: { label:'نویسنده', perms:{ products:'write', posts:'write', categories:'write',
+            orders:'read', users:'none', settings:'none', backups:'none', emails:'read' } },
+  viewer: { label:'ناظر',    perms:{ products:'read', posts:'read', categories:'read',
+            orders:'read', users:'none', settings:'none', backups:'none', emails:'none' } }
+};
+function currentUser(){
+  const uid = sessionStorage.getItem(SESSION_KEY);
+  if(!uid) return null;
+  return DB.users.find(u=>u.id===uid && u.active) || null;
+}
+function hasPerm(section){
+  const u = currentUser(); if(!u) return false;
+  const role = ROLES[u.role]; if(!role) return false;
+  const p = role.perms[section];
+  return p === 'write' || p === 'read';
+}
+function canWrite(section){
+  const u = currentUser(); if(!u) return false;
+  const role = ROLES[u.role]; if(!role) return false;
+  return role.perms[section] === 'write';
+}
+
+/* ========================================================================
+   Cart
+   ======================================================================== */
+function loadCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY)) || []; }catch{ return []; } }
+function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+let cart = loadCart();
+function cartCount(){ return cart.reduce((s,i)=>s+i.qty, 0); }
+function cartTotal(){
+  return cart.reduce((s,i)=>{
+    const p = DB.products.find(x=>x.id===i.productId);
+    return s + (p ? p.price * i.qty : 0);
+  }, 0);
+}
+function addToCart(productId, qty=1){
+  const p = DB.products.find(x=>x.id===productId);
+  if(!p){ toast('محصول یافت نشد','error'); return; }
+  const item = cart.find(i=>i.productId===productId);
+  if(item) item.qty += qty; else cart.push({ productId, qty });
+  saveCart(); toast(`«${p.name}» اضافه شد`,'success'); updateCartBadge();
+}
+function removeFromCart(productId){
+  cart = cart.filter(i=>i.productId!==productId);
+  saveCart(); updateCartBadge(); if(parseHash()[0]==='cart') render();
+}
+function updateQty(productId, delta){
+  const item = cart.find(i=>i.productId===productId);
+  if(!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  saveCart(); updateCartBadge(); if(parseHash()[0]==='cart') render();
+}
+function clearCart(){ cart=[]; saveCart(); updateCartBadge(); }
+function updateCartBadge(){
+  const count = cartCount();
+  document.querySelectorAll('[data-cart-badge]').forEach(b=>{
+    b.textContent = toFa(count);
+    b.style.display = count > 0 ? 'inline-block' : 'none';
+  });
+}
+
+/* ========================================================================
+   Helpers
+   ======================================================================== */
+const $  = (s, ctx=document) => ctx.querySelector(s);
+const $$ = (s, ctx=document) => [...ctx.querySelectorAll(s)];
+function escapeHTML(str){
+  if(str==null) return '';
+  return String(str).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function formatPrice(num){ return (Number(num)||0).toLocaleString('fa-IR').replace(/,/g,'٫')+' تومان'; }
+function toFa(n){ return String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]); }
+function uid(p='id'){ return p+'_'+Date.now()+'_'+Math.random().toString(36).slice(2,6); }
+function starsHTML(r){
+  let h=''; for(let i=1;i<=5;i++){
+    if(r>=i) h+='<i class="bi bi-star-fill"></i>';
+    else if(r>=i-0.5) h+='<i class="bi bi-star-half"></i>';
+    else h+='<i class="bi bi-star"></i>';
+  } return h;
+}
+function toast(msg, type=''){
+  const el = document.createElement('div');
+  el.className = 'toast toast-'+type; el.textContent = msg;
+  document.body.appendChild(el);
+  requestAnimationFrame(()=>el.classList.add('show'));
+  setTimeout(()=>{ el.classList.remove('show'); setTimeout(()=>el.remove(),300); },2800);
+}
+function todayJalali(){ return '۱۴۰۳/۰۷/'+toFa(new Date().getDate()); }
+function nowTimeFa(){
+  const d = new Date();
+  return toFa(d.getHours())+':'+toFa(String(d.getMinutes()).padStart(2,'0'))+':'+toFa(String(d.getSeconds()).padStart(2,'0'));
+}
+function download(filename, content, mime='text/plain'){
+  const blob = new Blob([content], { type: mime + ';charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 100);
+}
+
+/* ========================================================================
+   Modal system
+   ======================================================================== */
+function showModal(contentHTML, options = {}){
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.innerHTML = `
+    <div class="modal-box" style="max-width:${options.maxWidth||'560px'}">
+      ${options.title?`<div class="modal-head">
+        <h3>${escapeHTML(options.title)}</h3>
+        <button class="modal-close" onclick="closeModal()"><i class="bi bi-x-lg"></i></button>
+      </div>`:''}
+      <div class="modal-body">${contentHTML}</div>
+      ${(options.closeText !== null)?`<div class="modal-foot">
+        ${options.actions||''}
+        <button class="btn btn-ghost btn-sm" onclick="closeModal()">${escapeHTML(options.closeText||'بستن')}</button>
+      </div>`:''}
+    </div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+  requestAnimationFrame(()=>overlay.classList.add('show'));
+  if(options.onClose) overlay._onClose = options.onClose;
+  return overlay;
+}
+function closeModal(){
+  const ov = document.querySelector('.modal-overlay');
+  if(!ov) return;
+  if(ov._onClose) try{ ov._onClose(); }catch(e){ console.warn(e); }
+  ov.classList.remove('show');
+  setTimeout(()=>ov.remove(), 250);
+}
+
+/* ========================================================================
+   Emails (Simulated)
+   ======================================================================== */
+function sendSimulatedEmail({ to, subject, body, orderId=null, template='custom', showPreview=true }){
+  if(!DB.emails) DB.emails = [];
+  const email = {
+    id: uid('em'),
+    to, subject, body,
+    orderId,
+    template,
+    sentAt: todayJalali()+' '+nowTimeFa(),
+    status: 'sent',
+    unread: true
+  };
+  DB.emails.unshift(email);
+  if(DB.emails.length > 100) DB.emails = DB.emails.slice(0,100);
+  saveDB();
+  updateEmailCount();
+  if(showPreview) showEmailPreview(email);
+  return email;
+}
+function showEmailPreview(email){
+  showModal(`
+    <div class="email-preview">
+      <div class="email-preview-head">
+        <div style="font-size:12px;opacity:.85;margin-bottom:6px">
+          <i class="bi bi-envelope-check-fill"></i> ایمیل شبیه‌سازی‌شده
+        </div>
+        <div style="font-size:18px;font-weight:800">${escapeHTML(email.subject)}</div>
+      </div>
+      <div style="padding:14px 20px;background:#f8f8f8;border-bottom:1px solid #eee;font-size:12px;color:#666">
+        <div><strong>از:</strong> ${escapeHTML(DB.settings.emailSender)}</div>
+        <div><strong>به:</strong> ${escapeHTML(email.to)}</div>
+        <div><strong>زمان:</strong> ${escapeHTML(email.sentAt)}</div>
+      </div>
+      <div class="email-preview-body">${escapeHTML(email.body)}</div>
+    </div>
+  `, { title:'ارسال ایمیل موفق ✅', closeText:'بستن' });
+}
+function emailOrderTemplate(order, type='confirmed'){
+  const s = DB.settings;
+  if(type === 'confirmed'){
+    return {
+      subject: `تأیید سفارش ${order.id} — ${s.siteName}`,
+      body:
+`سلام ${order.customer} عزیز،
+
+سفارش شما با شناسه ${order.id} با موفقیت ثبت شد. ✅
+
+📋 جزئیات سفارش:
+${order.items.map(i=>`• ${i.name} × ${i.qty} = ${formatPrice(i.price*i.qty)}`).join('\n')}
+
+💰 مبلغ کل: ${formatPrice(order.total)}
+💳 روش پرداخت: ${order.method==='online'?'آنلاین':'در محل'}
+📍 آدرس: ${order.address}
+
+سفارش شما در اسرع وقت آماده و ارسال خواهد شد.
+
+با تشکر
+تیم ${s.siteName}
+${s.phone}`
+    };
+  }
+  if(type === 'shipped'){
+    return {
+      subject: `سفارش ${order.id} ارسال شد 🚚 — ${s.siteName}`,
+      body:
+`سلام ${order.customer} عزیز،
+
+سفارش شما با شناسه ${order.id} امروز ارسال شد. 🚚
+
+📍 آدرس تحویل: ${order.address}
+📞 شماره تماس: ${order.phone}
+
+به زودی تحویل داده می‌شود. از خرید شما سپاسگزاریم!
+
+تیم ${s.siteName}`
+    };
+  }
+  return {
+    subject: `سفارش ${order.id} — ${s.siteName}`,
+    body:`سلام ${order.customer} عزیز،\n\nسفارش شما در حال پردازش است.\n\nتیم ${s.siteName}`
+  };
+}
+function updateEmailCount(){
+  const count = (DB.emails||[]).filter(e=>e.unread).length;
+  document.querySelectorAll('[data-email-badge]').forEach(el=>{
+    el.textContent = toFa(count);
+    el.style.display = count > 0 ? 'inline-block' : 'none';
+  });
+}
+function openEmailModal(){
+  showModal(`
+    <div class="form-group"><label>گیرنده (ایمیل)</label>
+      <input class="input" id="emTo" type="email" placeholder="example@site.ir"></div>
+    <div class="form-group"><label>موضوع</label>
+      <input class="input" id="emSubject" placeholder="موضوع ایمیل"></div>
+    <div class="form-group"><label>متن ایمیل</label>
+      <textarea class="textarea" id="emBody" style="min-height:180px"></textarea></div>
+  `, {
+    title:'📧 ارسال ایمیل جدید',
+    actions:`<button class="btn btn-primary btn-sm" onclick="submitEmail()">
+      <i class="bi bi-send"></i> ارسال</button>`
+  });
+}
+function submitEmail(){
+  const to = $('#emTo').value.trim();
+  const subject = $('#emSubject').value.trim();
+  const body = $('#emBody').value.trim();
+  if(!to || !subject || !body){ toast('همه فیلدها الزامی است','error'); return; }
+  closeModal();
+  sendSimulatedEmail({ to, subject, body, showPreview:true });
+  toast('ایمیل ارسال شد ✅','success');
+  if(parseHash()[0]==='admin' && parseHash()[1]==='emails') render();
+}
+function deleteEmail(id){
+  DB.emails = DB.emails.filter(e=>e.id!==id);
+  saveDB(); toast('حذف شد','success'); render();
+}
+function toggleEmailRead(id){
+  const e = DB.emails.find(x=>x.id===id);
+  if(!e) return;
+  e.unread = !e.unread;
+  saveDB();
+}
+function viewEmail(id){
+  const e = DB.emails.find(x=>x.id===id);
+  if(!e) return;
+  if(e.unread){ e.unread = false; saveDB(); updateEmailCount(); }
+  showEmailPreview(e);
+  if(parseHash()[0]==='admin' && parseHash()[1]==='emails') render();
+}
+
+/* ========================================================================
+   Cron (Background)
+   ======================================================================== */
+let cronTimer = null;
+let cronCheckCount = 0;
+
+function logCron(msg, type='info'){
+  if(!DB.cronLog) DB.cronLog = [];
+  DB.cronLog.unshift({
+    time: todayJalali()+' '+nowTimeFa(),
+    msg, type
+  });
+  if(DB.cronLog.length > 50) DB.cronLog = DB.cronLog.slice(0,50);
+}
+function startBackgroundCron(){
+  if(cronTimer) clearInterval(cronTimer);
+  // هر ۶۰ ثانیه چک می‌کند
+  cronTimer = setInterval(runCronCheck, 60*1000);
+  // یک چک اولیه
+  setTimeout(runCronCheck, 3000);
+}
+function runCronCheck(){
+  cronCheckCount++;
+  DB.cronState.lastCheck = Date.now();
+  DB.cronState.runCount = (DB.cronState.runCount||0) + 1;
+
+  // بکاپ خودکار روزانه
+  if(DB.settings.autoBackup){
+    const last = DB.lastAutoBackup || 0;
+    const DAY = 24*60*60*1000;
+    if(Date.now() - last > DAY){
+      createBackup('بکاپ خودکار پس‌زمینه', true);
+      DB.lastAutoBackup = Date.now();
+      logCron('✅ بکاپ خودکار روزانه ایجاد شد', 'success');
+      // ایمیل اطلاع‌رسانی به مدیر
+      const admins = DB.users.filter(u=>u.role==='admin' && u.email);
+      admins.forEach(a=>{
+        sendSimulatedEmail({
+          to: a.email,
+          subject: `بکاپ خودکار — ${DB.settings.siteName}`,
+          body: `بکاپ خودکار در ${todayJalali()} ساعت ${nowTimeFa()} با موفقیت ایجاد شد.\n\nتعداد محصولات: ${DB.products.length}\nتعداد سفارش‌ها: ${DB.orders.length}`,
+          template: 'backup',
+          showPreview: false
+        });
+      });
+      toast('بکاپ خودکار در پس‌زمینه اجرا شد','success');
+    }
+  }
+
+  // پاکسازی نسخه‌های قدیمی (بیش از ۳۰ روز)
+  const DAY = 24*60*60*1000;
+  const before = DB.backups.length;
+  const adminEmail = 'admin@the8shop.ir'; // برای اطلاع
+  // در این نسخه ساده، پاکسازی خودکار نداریم
+
+  saveDB();
+  updateCronStatusUI();
+}
+function updateCronStatusUI(){
+  const el = document.querySelector('[data-cron-status]');
+  if(!el) return;
+  const last = DB.lastAutoBackup;
+  const ago = last ? Math.floor((Date.now() - last) / (1000*60*60)) : null;
+  const agoText = ago === null ? 'هرگز' :
+    (ago < 1 ? 'کمتر از یک ساعت پیش' : `${toFa(ago)} ساعت پیش`);
+  el.innerHTML = `
+    <span class="cron-dot"></span>
+    <span>کرون فعال — آخرین بکاپ خودکار: ${agoText}</span>
+  `;
+}
+
+/* ========================================================================
+   Backups
+   ======================================================================== */
+function createBackup(label='دستی', isAuto=false){
+  const snapshot = JSON.stringify(DB);
+  const entry = {
+    id: uid('bak'),
+    label, isAuto,
+    date: todayJalali(),
+    time: nowTimeFa(),
+    size: snapshot.length,
+    counts:{
+      products: DB.products.length,
+      orders: DB.orders.length,
+      posts: DB.posts.length,
+      users: DB.users.length
+    },
+    data: snapshot
+  };
+  DB.backups.unshift(entry);
+  if(DB.backups.length > 10) DB.backups = DB.backups.slice(0,10);
+  return entry;
+}
+function saveWithBackup(label){
+  const bak = createBackup(label, false);
+  DB.lastAutoBackup = Date.now();
+  saveDB();
+  return bak;
+}
+function restoreBackup(id){
+  if(!confirm('بازگردانی این نسخه، همه تغییرات فعلی را حذف می‌کند. مطمئنید؟')) return;
+  const bak = DB.backups.find(b=>b.id===id);
+  if(!bak){ toast('نسخه یافت نشد','error'); return; }
+  try{
+    const restored = JSON.parse(bak.data);
+    if(!restored.backups) restored.backups = DB.backups;
+    if(!restored.emails) restored.emails = DB.emails;
+    if(!restored.cronLog) restored.cronLog = DB.cronLog;
+    DB = restored;
+    saveDB();
+    toast('بازگردانی موفق','success');
+    render();
+  }catch(e){ toast('خطا در بازگردانی','error'); }
+}
+function deleteBackup(id){
+  if(!confirm('این نسخه حذف شود؟')) return;
+  DB.backups = DB.backups.filter(b=>b.id!==id);
+  saveDB(); toast('حذف شد','success'); render();
+}
+
+/* ========================================================================
+   PDF Export
+   ======================================================================== */
+async function exportDashboardPDF(){
+  if(typeof html2canvas === 'undefined' || !window.jspdf){
+    toast('کتابخانه‌های PDF بارگذاری نشده','error'); return;
+  }
+  toast('در حال آماده‌سازی گزارش PDF...','info');
+
+  // ساخت HTML گزارش
+  const reportHTML = buildReportHTML();
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'position:fixed;top:-99999px;right:0;width:800px;background:#ffffff;color:#000;padding:40px;direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif';
+  wrap.innerHTML = reportHTML;
+  document.body.appendChild(wrap);
+
+  try{
+    const canvas = await html2canvas(wrap, {
+      backgroundColor:'#ffffff', scale:2, useCORS:true, logging:false
+    });
+    const imgData = canvas.toDataURL('image/png');
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p','mm','a4');
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    const ratio = canvas.height / canvas.width;
+
+    const imgW = pageW - 20;
+    const imgH = imgW * ratio;
+
+    let yOffset = 0;
+    const pageContentH = pageH - 20;
+
+    while(yOffset < imgH){
+      if(yOffset > 0) pdf.addPage();
+      // crop canvas portion
+      const srcY = (yOffset / imgH) * canvas.height;
+      const srcH = Math.min((pageContentH / imgH) * canvas.height, canvas.height - srcY);
+
+      const tmpCanvas = document.createElement('canvas');
+      tmpCanvas.width = canvas.width;
+      tmpCanvas.height = srcH;
+      const ctx = tmpCanvas.getContext('2d');
+      ctx.drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
+      const partData = tmpCanvas.toDataURL('image/png');
+
+      const partH = (srcH / canvas.height) * imgH;
+      pdf.addImage(partData, 'PNG', 10, 10, imgW, partH);
+
+      yOffset += pageContentH;
+    }
+    const fname = `the8shop-report-${Date.now()}.pdf`;
+    pdf.save(fname);
+    toast('✅ گزارش PDF دانلود شد','success');
+  }catch(e){
+    console.error(e);
+    toast('خطا در تولید PDF','error');
+  }finally{
+    wrap.remove();
+  }
+}
+
+function buildReportHTML(){
+  const totalRevenue = DB.orders.filter(o=>o.status==='completed').reduce((s,o)=>s+o.total,0);
+  const pending = DB.orders.filter(o=>o.status==='pending').length;
+  const s = DB.settings;
+  return `
+    <div style="text-align:center;border-bottom:3px solid #e63946;padding-bottom:16px;margin-bottom:24px">
+      <h1 style="font-size:26px;margin:0;color:#111">${escapeHTML(s.siteName)}</h1>
+      <p style="color:#666;margin:6px 0 0;font-size:14px">گزارش کامل فروشگاه</p>
+      <p style="color:#999;margin:4px 0 0;font-size:12px">تاریخ: ${todayJalali()} — ساعت ${nowTimeFa()}</p>
+    </div>
+
+    <h2 style="font-size:16px;color:#111;margin:20px 0 12px;border-right:4px solid #e63946;padding-right:10px">خلاصه آماری</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <tr>
+        <td style="padding:10px;border:1px solid #ddd;background:#f9f9f9"><strong>تعداد محصولات:</strong></td>
+        <td style="padding:10px;border:1px solid #ddd">${toFa(DB.products.length)}</td>
+        <td style="padding:10px;border:1px solid #ddd;background:#f9f9f9"><strong>تعداد سفارش‌ها:</strong></td>
+        <td style="padding:10px;border:1px solid #ddd">${toFa(DB.orders.length)}</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #ddd;background:#f9f9f9"><strong>درآمد تکمیل‌شده:</strong></td>
+        <td style="padding:10px;border:1px solid #ddd">${formatPrice(totalRevenue)}</td>
+        <td style="padding:10px;border:1px solid #ddd;background:#f9f9f9"><strong>سفارش در انتظار:</strong></td>
+        <td style="padding:10px;border:1px solid #ddd">${toFa(pending)}</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #ddd;background:#f9f9f9"><strong>تعداد مقالات:</strong></td>
+        <td style="padding:10px;border:1px solid #ddd">${toFa(DB.posts.length)}</td>
+        <td style="padding:10px;border:1px solid #ddd;background:#f9f9f9"><strong>تعداد کاربران:</strong></td>
+        <td style="padding:10px;border:1px solid #ddd">${toFa(DB.users.length)}</td>
+      </tr>
+    </table>
+
+    <h2 style="font-size:16px;color:#111;margin:24px 0 12px;border-right:4px solid #e63946;padding-right:10px">فروش ۶ ماه اخیر</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead>
+        <tr style="background:#e63946;color:#fff">
+          <th style="padding:8px;border:1px solid #ddd;text-align:right">ماه</th>
+          <th style="padding:8px;border:1px solid #ddd;text-align:right">مبلغ فروش</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${DB.salesHistory.map(sh=>`
+          <tr>
+            <td style="padding:8px;border:1px solid #ddd">${escapeHTML(sh.month)}</td>
+            <td style="padding:8px;border:1px solid #ddd">${formatPrice(sh.amount)}</td>
+          </tr>`).join('')}
+      </tbody>
+    </table>
+
+    <h2 style="font-size:16px;color:#111;margin:24px 0 12px;border-right:4px solid #e63946;padding-right:10px">آخرین ۱۰ سفارش</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead>
+        <tr style="background:#333;color:#fff">
+          <th style="padding:6px;border:1px solid #ddd;text-align:right">شناسه</th>
+          <th style="padding:6px;border:1px solid #ddd;text-align:right">مشتری</th>
+          <th style="padding:6px;border:1px solid #ddd;text-align:right">مبلغ</th>
+          <th style="padding:6px;border:1px solid #ddd;text-align:right">وضعیت</th>
+          <th style="padding:6px;border:1px solid #ddd;text-align:right">تاریخ</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${DB.orders.slice(0,10).map(o=>{
+          const st = { pending:'در انتظار', shipped:'ارسال شده', completed:'تکمیل شده', cancelled:'لغو شده' }[o.status] || o.status;
+          return `<tr>
+            <td style="padding:6px;border:1px solid #ddd">${escapeHTML(o.id)}</td>
+            <td style="padding:6px;border:1px solid #ddd">${escapeHTML(o.customer)}</td>
+            <td style="padding:6px;border:1px solid #ddd">${formatPrice(o.total)}</td>
+            <td style="padding:6px;border:1px solid #ddd">${st}</td>
+            <td style="padding:6px;border:1px solid #ddd">${escapeHTML(o.date)}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+
+    <h2 style="font-size:16px;color:#111;margin:24px 0 12px;border-right:4px solid #e63946;padding-right:10px">لیست محصولات</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead>
+        <tr style="background:#333;color:#fff">
+          <th style="padding:6px;border:1px solid #ddd;text-align:right">نام</th>
+          <th style="padding:6px;border:1px solid #ddd;text-align:right">دسته</th>
+          <th style="padding:6px;border:1px solid #ddd;text-align:right">قیمت</th>
+          <th style="padding:6px;border:1px solid #ddd;text-align:right">بارکد</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${DB.products.map(p=>{
+          const cat = DB.categories.find(c=>c.id===p.categoryId);
+          return `<tr>
+            <td style="padding:6px;border:1px solid #ddd">${escapeHTML(p.name)}</td>
+            <td style="padding:6px;border:1px solid #ddd">${escapeHTML(cat?.name||'—')}</td>
+            <td style="padding:6px;border:1px solid #ddd">${formatPrice(p.price)}</td>
+            <td style="padding:6px;border:1px solid #ddd;font-family:monospace;direction:ltr">${escapeHTML(p.barcode||'—')}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+
+    <div style="margin-top:30px;padding-top:14px;border-top:1px solid #ddd;text-align:center;font-size:11px;color:#999">
+      ${escapeHTML(s.copyright)}
+    </div>
+  `;
+}
+
+/* ========================================================================
+   Barcode Scanner
+   ======================================================================== */
+let qrScanner = null;
+function openBarcodeScanner(){
+  if(typeof Html5Qrcode === 'undefined'){
+    toast('کتابخانه اسکن بارکد بارگذاری نشد','error'); return;
+  }
+  showModal(`
+    <div class="scanner-frame">
+      <div id="qrReader"></div>
+      <div class="scan-overlay"><div class="scan-target"></div></div>
+    </div>
+    <p style="text-align:center;color:var(--muted);margin-top:14px;font-size:13px">
+      📷 دوربین را به سمت بارکد بگیرید
+    </p>
+    <p style="text-align:center;color:var(--muted);font-size:11px;margin-top:8px">
+      پس از اسکن، نتایج جستجو اعمال می‌شود
+    </p>
+    <div style="text-align:center;margin-top:14px">
+      <button class="btn btn-ghost btn-sm" onclick="closeBarcodeScanner()">
+        <i class="bi bi-x-circle"></i> بستن</button>
+    </div>
+  `, {
+    title:'📷 اسکن بارکد محصول',
+    closeText:null,
+    maxWidth:'500px',
+    onClose: stopBarcodeScanner
+  });
+  setTimeout(startBarcodeScanner, 250);
+}
+function startBarcodeScanner(){
+  if(!document.getElementById('qrReader')) return;
+  try{
+    qrScanner = new Html5Qrcode('qrReader', { verbose:false });
+    qrScanner.start(
+      { facingMode:'environment' },
+      { fps:10, qrbox:{ width:250, height:150 } },
+      (decodedText) => {
+        const code = String(decodedText||'').trim();
+        stopBarcodeScanner();
+        closeModal();
+        // جستجو در محصولات بر اساس بارکد
+        const prod = DB.products.find(p=>(p.barcode||'').trim() === code);
+        if(prod){
+          toast(`✅ محصول یافت شد: ${prod.name}`,'success');
+          openBarcodeResultModal(prod, code);
+        } else {
+          // جستجو در سفارش‌ها
+          orderFilters.search = code;
+          toast(`🔍 جستجو با کد: ${code}`,'info');
+          if(parseHash()[0]==='admin' && parseHash()[1]==='orders'){
+            render();
+          } else {
+            navigate('/admin/orders');
+            render();
+          }
+        }
+      },
+      () => { /* خطاهای تکی اسکن - نادیده بگیر */ }
+    ).catch(err=>{
+      console.warn(err);
+      toast('دسترسی به دوربین ممکن نیست. از HTTPS استفاده کنید.','error');
+      const el = document.getElementById('qrReader');
+      if(el) el.innerHTML = '<div style="padding:30px;text-align:center;color:#f87171">'+
+        '<i class="bi bi-camera-video-off" style="font-size:40px"></i>'+
+        '<p style="margin-top:12px">دوربین در دسترس نیست</p>'+
+        '<p style="font-size:12px;color:#9a9aa0">'+
+        'مرورگر برای دسترسی به دوربین نیاز به HTTPS یا localhost دارد.'+
+        '</p></div>';
+    });
+  }catch(e){
+    console.error(e);
+    toast('خطا در راه‌اندازی دوربین','error');
+  }
+}
+function stopBarcodeScanner(){
+  if(qrScanner){
+    try{
+      qrScanner.stop().then(()=>{ qrScanner.clear(); qrScanner = null; })
+        .catch(()=>{ qrScanner = null; });
+    }catch{ qrScanner = null; }
+  }
+}
+function openBarcodeResultModal(prod, code){
+  const cat = DB.categories.find(c=>c.id===prod.categoryId);
+  showModal(`
+    <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:16px">
+      <div class="table-product-icon" style="width:70px;height:70px;font-size:32px">
+        ${productImageHTML(prod)}
+      </div>
+      <div style="flex:1">
+        <h3 style="margin:0 0 6px;font-size:17px">${escapeHTML(prod.name)}</h3>
+        <span class="badge badge-gold">${escapeHTML(cat?.name||'—')}</span>
+      </div>
+    </div>
+    <div class="order-info" style="margin:0">
+      <div class="row"><span>بارکد</span><span style="font-family:monospace;direction:ltr">${escapeHTML(code)}</span></div>
+      <div class="row"><span>قیمت</span><span>${formatPrice(prod.price)}</span></div>
+      ${prod.oldPrice?`<div class="row"><span>قیمت قدیم</span><span><del>${formatPrice(prod.oldPrice)}</del></span></div>`:''}
+      <div class="row"><span>امتیاز</span><span style="color:var(--gold)">${starsHTML(prod.stars)}</span></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+      <a href="#/admin/products/${prod.id}" class="btn btn-primary btn-sm">
+        <i class="bi bi-pencil"></i> ویرایش محصول</a>
+      <a href="#/shop/${prod.id}" class="btn btn-outline btn-sm">
+        <i class="bi bi-eye"></i> مشاهده در سایت</a>
+    </div>
+  `, { title:'🎯 بارکد اسکن شد', closeText:'بستن' });
+}
+
+/* ========================================================================
+   Invoice Print
+   ======================================================================== */
+function printInvoice(orderId){
+  const o = DB.orders.find(x=>x.id===orderId);
+  if(!o){ toast('سفارش یافت نشد','error'); return; }
+  const s = DB.settings;
+  const stMap = { pending:'در انتظار', shipped:'ارسال شده', completed:'تکمیل شده', cancelled:'لغو شده' };
+  const subtotal = o.items.reduce((sum,i)=>sum + i.price*i.qty, 0);
+  const shipping = subtotal >= 500000 ? 0 : 35000;
+
+  const itemsHTML = o.items.map((it, idx)=>`
+    <tr>
+      <td>${toFa(idx+1)}</td>
+      <td>${escapeHTML(it.name)}</td>
+      <td>${toFa(it.qty)}</td>
+      <td>${formatPrice(it.price)}</td>
+      <td>${formatPrice(it.price*it.qty)}</td>
+    </tr>`).join('');
+
+  const win = window.open('', '', 'width=850,height=1000');
+  if(!win){ toast('پنجره چاپ باز نشد. پاپ‌آپ را اجازه دهید.','error'); return; }
+  win.document.write(`
+    <!DOCTYPE html>
+    <html lang="fa" dir="rtl">
+    <head>
+      <meta charset="UTF-8">
+      <title>فاکتور ${escapeHTML(o.id)}</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+      <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:Vazirmatn,Tahoma,sans-serif;background:#fff;color:#111;
+          padding:30px;direction:rtl;line-height:1.7}
+        .inv-head{display:flex;justify-content:space-between;align-items:flex-start;
+          border-bottom:3px solid #e63946;padding-bottom:18px;margin-bottom:24px;flex-wrap:wrap;gap:14px}
+        .inv-brand h1{font-size:26px;color:#e63946;margin-bottom:4px}
+        .inv-brand p{font-size:13px;color:#666}
+        .inv-meta{text-align:left;font-size:13px;color:#333}
+        .inv-meta strong{color:#111}
+        .inv-title{text-align:center;font-size:22px;font-weight:800;margin:20px 0;
+          padding:12px;background:#f5f5f5;border-radius:8px;letter-spacing:1px}
+        .inv-info{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+        .inv-box{padding:14px 16px;border:1px solid #e0e0e0;border-radius:10px;background:#fafafa}
+        .inv-box h3{font-size:13px;font-weight:800;color:#e63946;margin-bottom:10px;
+          padding-bottom:6px;border-bottom:1px solid #eee}
+        .inv-box div{font-size:13px;padding:3px 0;color:#333}
+        .inv-box div strong{color:#111;margin-left:6px}
+        table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}
+        thead{background:#e63946;color:#fff}
+        th,td{padding:11px 12px;text-align:right;border:1px solid #e0e0e0}
+        tbody tr:nth-child(even){background:#fafafa}
+        .inv-total{margin-top:20px;display:flex;justify-content:flex-end}
+        .inv-total table{width:auto;min-width:320px}
+        .inv-total table td{padding:9px 14px;border:none;border-bottom:1px solid #eee}
+        .inv-total table td:last-child{font-weight:800;text-align:left}
+        .inv-total .grand{font-size:16px;color:#e63946;border-top:2px solid #e63946;
+          border-bottom:none;padding-top:12px;font-weight:900}
+        .inv-foot{margin-top:40px;padding-top:20px;border-top:1px dashed #ccc;
+          text-align:center;font-size:12px;color:#888}
+        .inv-stamp{display:inline-block;padding:6px 14px;border:2px solid #10b981;
+          color:#10b981;font-weight:800;border-radius:6px;margin-top:10px;font-size:13px;
+          transform:rotate(-3deg)}
+        @media print{
+          body{padding:10px}
+          .no-print{display:none !important}
+        }
+      </style>
+    </head>
+    <body>
+      <div class="inv-head">
+        <div class="inv-brand">
+          <h1>${escapeHTML(s.siteName)}</h1>
+          <p>${escapeHTML(s.address)}</p>
+          <p>تلفن: ${escapeHTML(s.phone)} — ایمیل: ${escapeHTML(s.email)}</p>
+        </div>
+        <div class="inv-meta">
+          <div><strong>شماره فاکتور:</strong> ${escapeHTML(o.id)}</div>
+          <div><strong>تاریخ صدور:</strong> ${escapeHTML(o.date)}</div>
+          <div><strong>ساعت:</strong> ${nowTimeFa()}</div>
+        </div>
+      </div>
+
+      <div class="inv-title">فاکتور فروش کالا</div>
+
+      <div class="inv-info">
+        <div class="inv-box">
+          <h3>خریدار</h3>
+          <div><strong>نام:</strong> ${escapeHTML(o.customer)}</div>
+          <div><strong>تلفن:</strong> ${escapeHTML(o.phone)}</div>
+          <div><strong>آدرس:</strong> ${escapeHTML(o.address||'—')}</div>
+          ${o.email?`<div><strong>ایمیل:</strong> ${escapeHTML(o.email)}</div>`:''}
+        </div>
+        <div class="inv-box">
+          <h3>اطلاعات پرداخت</h3>
+          <div><strong>روش پرداخت:</strong> ${o.method==='online'?'آنلاین':'در محل'}</div>
+          <div><strong>وضعیت:</strong> ${stMap[o.status]||o.status}</div>
+          <div><strong>تعداد اقلام:</strong> ${toFa(o.items.reduce((s,i)=>s+i.qty,0))}</div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:40px">#</th>
+            <th>شرح کالا</th>
+            <th style="width:70px">تعداد</th>
+            <th style="width:130px">قیمت واحد</th>
+            <th style="width:140px">جمع</th>
+          </tr>
+        </thead>
+        <tbody>${itemsHTML}</tbody>
+      </table>
+
+      <div class="inv-total">
+        <table>
+          <tr><td>جمع کل کالاها:</td><td>${formatPrice(subtotal)}</td></tr>
+          <tr><td>هزینه ارسال:</td><td>${shipping?formatPrice(shipping):'رایگان'}</td></tr>
+          <tr class="grand"><td>مبلغ قابل پرداخت:</td><td>${formatPrice(o.total)}</td></tr>
+        </table>
+      </div>
+
+      <div class="inv-foot">
+        <p>از خرید شما سپاسگزاریم 🙏</p>
+        <div class="inv-stamp">${o.status==='completed'?'پرداخت شده':(o.status==='shipped'?'ارسال شده':'در حال پردازش')}</div>
+        <p style="margin-top:14px">${escapeHTML(s.copyright)}</p>
+      </div>
+
+      <div class="no-print" style="text-align:center;margin-top:30px">
+        <button onclick="window.print()" style="padding:12px 30px;background:#e63946;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-left:10px">
+          🖨️ چاپ فاکتور
+        </button>
+        <button onclick="window.close()" style="padding:12px 30px;background:#333;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer">
+          بستن
+        </button>
+      </div>
+    </body>
+    </html>
+  `);
+  win.document.close();
+}
+
+/* ========================================================================
+   Auth
+   ======================================================================== */
+function isLoggedIn(){ return !!currentUser(); }
+function login(u,p){
+  const user = DB.users.find(x=>x.username===u && x.password===p && x.active);
+  if(user){ sessionStorage.setItem(SESSION_KEY, user.id); return true; }
+  return false;
+}
+function logout(){
+  sessionStorage.removeItem(SESSION_KEY);
+  location.hash='#/'; render(); toast('خارج شدید','success');
+}
+
+/* ========================================================================
+   Router
+   ======================================================================== */
+function parseHash(){
+  const h=(location.hash||'#/').slice(1);
+  return h.split('/').filter(Boolean);
+}
+function navigate(path){ location.hash = '#'+path; }
+
+function render(){
+  const parts = parseHash();
+  const app = $('#app');
+  if(parts[0]==='admin'){
+    if(!isLoggedIn()) return renderLogin(app);
+    return renderAdmin(app, parts[1]||'dashboard', parts[2]);
+  }
+  if(parts[0]==='shop' && parts[1])    return renderProductDetail(app, parts[1]);
+  if(parts[0]==='blog' && parts[1])    return renderPostDetail(app, parts[1]);
+  if(parts[0]==='cart')                return renderCart(app);
+  if(parts[0]==='checkout')            return renderCheckout(app);
+  if(parts[0]==='success' && parts[1]) return renderSuccess(app, parts[1]);
+  if(parts[0]==='shop')                return renderPage(app,'shop');
+  if(parts[0]==='blog')                return renderPage(app,'blog');
+  return renderPage(app,'home');
+}
+window.addEventListener('hashchange', render);
+
+/* ========================================================================
+   Public pages
+   ======================================================================== */
+function publicHeader(active){
+  const s = DB.settings;
+  const count = cartCount();
+  return `
+  <div class="top-bar"><div class="container">
+    <div><i class="bi bi-telephone"></i> ${escapeHTML(s.phone)}
+      <span class="sep">|</span><i class="bi bi-truck"></i> ارسال رایگان بالای ۵۰۰ هزار تومان</div>
+    <div class="top-bar-social">
+      <a href="${escapeHTML(s.instagram)}"><i class="bi bi-instagram"></i></a>
+      <a href="${escapeHTML(s.telegram)}"><i class="bi bi-telegram"></i></a>
+      <a href="${escapeHTML(s.whatsapp)}"><i class="bi bi-whatsapp"></i></a>
+      <a href="${escapeHTML(s.linkedin)}"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </div></div>
+  <header class="site-header"><div class="container header-inner">
+    <a href="#/" class="logo"><i class="bi bi-shop-window"></i>
+      ${escapeHTML(s.siteName).split(' ')[0]}<span>${escapeHTML(s.siteName).split(' ').slice(1).join(' ')||'شاپ'}</span>
+    </a>
+    <nav class="main-nav"><ul>
+      <li><a href="#/" class="${active==='home'?'active':''}">صفحه اصلی</a></li>
+      <li><a href="#/shop" class="${active==='shop'?'active':''}">فروشگاه</a></li>
+      <li><a href="#/blog" class="${active==='blog'?'active':''}">مجله</a></li>
+      <li><a href="#admin">پنل مدیریت</a></li>
+    </ul></nav>
+    <div class="header-actions">
+      <button class="icon-btn"><i class="bi bi-search"></i></button>
+      <button class="icon-btn"><i class="bi bi-heart"></i></button>
+      <a href="#/cart" class="icon-btn" style="position:relative"><i class="bi bi-bag"></i>
+        <span class="badge-count" data-cart-badge style="display:${count>0?'inline-block':'none'}">${toFa(count)}</span>
+      </a>
+      <button class="mobile-toggle"><i class="bi bi-list"></i></button>
+    </div>
+  </div></header>`;
+}
+function publicFooter(){
+  const s = DB.settings;
+  return `
+  <section class="newsletter"><div class="container">
+    <h2>عضو خبرنامه ما شوید</h2>
+    <p>از تخفیف‌ها و محصولات جدید باخبر شوید</p>
+    <form class="newsletter-form" onsubmit="event.preventDefault();handleNewsletter(event)">
+      <input type="email" id="nlEmail" placeholder="ایمیل..." required><button>عضویت</button>
+    </form>
+  </div></section>
+  <footer class="site-footer"><div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>درباره ${escapeHTML(s.siteName)}</h3>
+        <p>فروشگاه اینترنتی ${escapeHTML(s.siteName)} با هدف ارائه بهترین محصولات با قیمت مناسب و کیفیت بالا.</p>
+        <div class="footer-social">
+          <a href="${escapeHTML(s.instagram)}"><i class="bi bi-instagram"></i></a>
+          <a href="${escapeHTML(s.telegram)}"><i class="bi bi-telegram"></i></a>
+          <a href="${escapeHTML(s.whatsapp)}"><i class="bi bi-whatsapp"></i></a>
+          <a href="${escapeHTML(s.linkedin)}"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h3>لینک‌ها</h3>
+        <a href="#/">صفحه اصلی</a><a href="#/shop">فروشگاه</a>
+        <a href="#/blog">مجله</a><a href="#/cart">سبد خرید</a></div>
+      <div class="footer-col"><h3>خدمات</h3>
+        <a href="#">حساب کاربری</a><a href="#">پیگیری سفارش</a>
+        <a href="#">قوانین</a><a href="#">سوالات متداول</a></div>
+      <div class="footer-col"><h3>تماس</h3>
+        <div class="contact-item"><i class="bi bi-geo-alt"></i><span>${escapeHTML(s.address)}</span></div>
+        <div class="contact-item"><i class="bi bi-telephone"></i><span>${escapeHTML(s.phone)}</span></div>
+        <div class="contact-item"><i class="bi bi-envelope"></i><span>${escapeHTML(s.email)}</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">${escapeHTML(s.copyright)}</div>
+  </div></footer>
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="bi bi-arrow-up"></i></button>`;
+}
+function handleNewsletter(e){
+  const email = $('#nlEmail')?.value.trim();
+  if(!email) return;
+  sendSimulatedEmail({
+    to: email,
+    subject: `عضویت در خبرنامه ${DB.settings.siteName} ✅`,
+    body: `سلام،\n\nعضویت شما در خبرنامه ${DB.settings.siteName} با موفقیت ثبت شد. 🎉\n\nاز این پس از تخفیف‌ها و محصولات جدید باخبر خواهید شد.\n\nبا تشکر\nتیم ${DB.settings.siteName}`,
+    template: 'newsletter',
+    showPreview: false
+  });
+  toast('ایمیل ثبت شد ✅','success');
+}
+function productImageHTML(p){
+  if(p.image) return `<img src="${p.image}" alt="${escapeHTML(p.name)}">`;
+  return `<i class="bi ${p.icon||'bi-box'}"></i>`;
+}
+function categoryCardHTML(c){
+  return `<div class="category-card" onclick="navigate('/shop?cat=${c.id}')">
+    <div class="category-icon" style="background:linear-gradient(135deg,${c.color},${c.color}aa)">
+      <i class="bi ${c.icon}"></i></div>
+    <h3>${escapeHTML(c.name)}</h3><span>${toFa(c.count)} محصول</span></div>`;
+}
+function productCardHTML(p){
+  return `<div class="product-card">
+    ${p.badge?`<span class="product-badge ${p.badgeType==='sale'?'sale':''}">${escapeHTML(p.badge)}</span>`:''}
+    <div class="product-img" onclick="navigate('/shop/${p.id}')">${productImageHTML(p)}</div>
+    <div class="product-info">
+      <h3 onclick="navigate('/shop/${p.id}')">${escapeHTML(p.name)}</h3>
+      <div class="product-stars">${starsHTML(p.stars||0)}</div>
+      <div class="product-price">
+        <div class="price">${formatPrice(p.price)}
+          ${p.oldPrice?`<del>${formatPrice(p.oldPrice)}</del>`:''}</div>
+        <button class="add-to-cart" onclick="addToCart('${p.id}');this.innerHTML='<i class=\\'bi bi-check-lg\\'></i>';setTimeout(()=>this.innerHTML='<i class=\\'bi bi-bag-plus\\'></i>',1200)">
+          <i class="bi bi-bag-plus"></i></button>
+      </div>
+    </div></div>`;
+}
+function blogCardHTML(b){
+  return `<article class="blog-card" onclick="navigate('/blog/${b.id}')">
+    <div class="blog-thumb"><i class="bi ${b.icon||'bi-file-text'}"></i></div>
+    <div class="blog-body">
+      <div class="blog-meta">
+        <span><i class="bi bi-calendar3"></i> ${escapeHTML(b.date)}</span>
+        <span><i class="bi bi-chat"></i> ${toFa(b.comments||0)}</span></div>
+      <h3>${escapeHTML(b.title)}</h3><p>${escapeHTML(b.excerpt)}</p>
+      <span class="read-more">ادامه مطلب <i class="bi bi-arrow-left"></i></span>
+    </div></article>`;
+}
+
+function renderPage(app, page){
+  let body='';
+  const s = DB.settings;
+  if(page==='home'){
+    const featured = DB.products.slice(0,4);
+    const posts = DB.posts.slice(0,3);
+    const cats = DB.categories.slice(0,4);
+    body = `
+      <section class="hero"><div class="container hero-inner">
+        <div>
+          <h1>${escapeHTML(s.tagline.split(' ').slice(0,3).join(' '))}
+            <span>${escapeHTML(s.tagline.split(' ').slice(3).join(' '))||'ایرانی'}</span></h1>
+          <p>مجموعه‌ای بی‌نظیر از بهترین محصولات با طراحی مینیمال و تجربه خرید لذت‌بخش.</p>
+          <div class="hero-actions">
+            <a href="#/shop" class="btn btn-primary"><i class="bi bi-bag-check"></i> شروع خرید</a>
+            <a href="#/blog" class="btn btn-outline"><i class="bi bi-play-circle"></i> مجله</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="floating-card"><div class="fc-product">
+            <div class="fc-img" style="background:linear-gradient(135deg,#e63946,#8b0000)">
+              <i class="bi bi-smartwatch" style="color:#fff"></i></div>
+            <div><div class="fc-title">ساعت هوشمند</div><div class="fc-price">۲٫۸۵۰٫۰۰۰ تومان</div></div></div>
+            <div class="fc-stars">${starsHTML(4.5)}</div></div>
+          <div class="floating-card">
+            <div class="fc-product"><div class="fc-img" style="background:linear-gradient(135deg,#f4a261,#e76f51)">
+              <i class="bi bi-headphones" style="color:#fff"></i></div>
+              <div><div class="fc-title">هدفون بی‌سیم</div><div class="fc-price">۱٫۲۴۰٫۰۰۰ تومان</div></div></div>
+            <div class="fc-product"><div class="fc-img" style="background:linear-gradient(135deg,#8b5cf6,#6366f1)">
+              <i class="bi bi-phone" style="color:#fff"></i></div>
+              <div><div class="fc-title">گوشی هوشمند</div><div class="fc-price">۱۵٫۹۰۰٫۰۰۰ تومان</div></div></div></div>
+          <div class="floating-card"><div class="fc-product">
+            <div class="fc-img" style="background:linear-gradient(135deg,#10b981,#059669)">
+              <i class="bi bi-bag-heart" style="color:#fff"></i></div>
+            <div><div class="fc-title">+۱٫۲۰۰ خرید</div><div class="fc-price">رضایت ۹۸٪</div></div></div></div>
+        </div>
+      </div></section>
+      <section class="section"><div class="container">
+        <div class="section-head"><h2>دسته‌بندی <span>محبوب</span></h2></div>
+        <div class="category-grid">${cats.map(categoryCardHTML).join('')}</div>
+      </div></section>
+      <section class="section" style="background:#0a0a0c"><div class="container">
+        <div class="section-head"><h2>جدیدترین <span>محصولات</span></h2></div>
+        <div class="products-grid">${featured.map(productCardHTML).join('')}</div>
+        <div style="text-align:center;margin-top:40px">
+          <a href="#/shop" class="btn btn-outline">همه محصولات <i class="bi bi-arrow-left"></i></a></div>
+      </div></section>
+      <section class="section"><div class="container">
+        <div class="section-head"><h2>آخرین <span>مقالات</span></h2></div>
+        <div class="blog-grid">${posts.map(blogCardHTML).join('')}</div>
+      </div></section>`;
+  }
+  if(page==='shop'){
+    const catFilter = new URLSearchParams(location.hash.split('?')[1]||'').get('cat');
+    let list = DB.products;
+    if(catFilter) list = list.filter(p=>p.categoryId===catFilter);
+    const cat = catFilter ? DB.categories.find(c=>c.id===catFilter) : null;
+    body = `<section class="page-hero"><div class="container">
+      <h1>${cat?escapeHTML(cat.name):'فروشگاه'}</h1>
+      <div class="breadcrumb"><a href="#/">خانه</a><i class="bi bi-chevron-left"></i>
+        <span>${cat?escapeHTML(cat.name):'همه محصولات'}</span></div></div></section>
+      <section class="section"><div class="container">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px">
+          <a href="#/shop" class="btn ${!catFilter?'btn-primary':'btn-outline'} btn-sm">همه</a>
+          ${DB.categories.map(c=>`<a href="#/shop?cat=${c.id}" class="btn ${catFilter===c.id?'btn-primary':'btn-outline'} btn-sm">
+            <i class="bi ${c.icon}"></i> ${escapeHTML(c.name)}</a>`).join('')}
+        </div>
+        ${list.length?`<div class="products-grid">${list.map(productCardHTML).join('')}</div>`
+          :`<div class="empty"><i class="bi bi-inbox"></i><h3>محصولی یافت نشد</h3></div>`}
+      </div></section>`;
+  }
+  if(page==='blog'){
+    body = `<section class="page-hero"><div class="container"><h1>مجله</h1>
+      <div class="breadcrumb"><a href="#/">خانه</a><i class="bi bi-chevron-left"></i><span>مجله</span></div>
+      </div></section>
+      <section class="section"><div class="container">
+        ${DB.posts.length?`<div class="blog-grid">${DB.posts.map(blogCardHTML).join('')}</div>`
+          :`<div class="empty"><i class="bi bi-journal"></i><h3>مقاله‌ای وجود ندارد</h3></div>`}
+      </div></section>`;
+  }
+  app.innerHTML = publicHeader(page) + body + publicFooter();
+  window.scrollTo(0,0); updateCartBadge();
+}
+
+function renderProductDetail(app, id){
+  const p = DB.products.find(x=>x.id===id);
+  if(!p){ navigate('/shop'); return; }
+  const cat = DB.categories.find(c=>c.id===p.categoryId);
+  const body = `<section class="page-hero"><div class="container">
+    <div class="breadcrumb"><a href="#/">خانه</a><i class="bi bi-chevron-left"></i>
+      <a href="#/shop">فروشگاه</a><i class="bi bi-chevron-left"></i>
+      <span>${escapeHTML(p.name)}</span></div></div></section>
+    <section class="section"><div class="container"><div class="product-detail">
+      <div class="product-detail-img">${productImageHTML(p)}</div>
+      <div>
+        <span class="badge badge-gold">${escapeHTML(cat?.name||'محصول')}</span>
+        <h1 style="margin-top:12px">${escapeHTML(p.name)}</h1>
+        <div class="product-stars" style="font-size:16px;margin-bottom:8px">${starsHTML(p.stars)}</div>
+        <p class="desc">${escapeHTML(p.description||'')}</p>
+        <div class="price-big">${formatPrice(p.price)}
+          ${p.oldPrice?`<del>${formatPrice(p.oldPrice)}</del>`:''}</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+          <button class="btn btn-primary" onclick="addToCart('${p.id}');navigate('/cart')">
+            <i class="bi bi-bag-check"></i> افزودن و ادامه</button>
+          <button class="btn btn-outline" onclick="addToCart('${p.id}')">
+            <i class="bi bi-bag-plus"></i> افزودن به سبد</button>
+        </div>
+      </div>
+    </div></div></section>`;
+  app.innerHTML = publicHeader('shop') + body + publicFooter();
+  window.scrollTo(0,0); updateCartBadge();
+}
+
+function renderPostDetail(app, id){
+  const b = DB.posts.find(x=>x.id===id);
+  if(!b){ navigate('/blog'); return; }
+  const body = `<section class="page-hero"><div class="container">
+    <div class="breadcrumb"><a href="#/">خانه</a><i class="bi bi-chevron-left"></i>
+      <a href="#/blog">مجله</a><i class="bi bi-chevron-left"></i>
+      <span>${escapeHTML(b.title)}</span></div></div></section>
+    <section class="section"><div class="container"><article class="post-detail">
+      <div style="font-size:90px;text-align:center;color:var(--accent);margin-bottom:20px">
+        <i class="bi ${b.icon||'bi-file-text'}"></i></div>
+      <h1>${escapeHTML(b.title)}</h1>
+      <div class="post-meta">
+        <span><i class="bi bi-person"></i>${escapeHTML(b.author)}</span>
+        <span><i class="bi bi-calendar3"></i>${escapeHTML(b.date)}</span>
+        <span><i class="bi bi-chat"></i>${toFa(b.comments||0)}</span></div>
+      <div class="content">${escapeHTML(b.content).replace(/\n/g,'<br>')}</div>
+      <div style="margin-top:40px;text-align:center">
+        <a href="#/blog" class="btn btn-outline"><i class="bi bi-arrow-right"></i> بازگشت</a></div>
+    </article></div></section>`;
+  app.innerHTML = publicHeader('blog') + body + publicFooter();
+  window.scrollTo(0,0);
+}
+
+/* ========================================================================
+   Cart & Checkout
+   ======================================================================== */
+function renderCart(app){
+  let body='';
+  if(!cart.length){
+    body = `<section class="page-hero"><div class="container"><h1>سبد خرید</h1></div></section>
+      <section class="section"><div class="container"><div class="cart-empty">
+        <i class="bi bi-bag-x"></i><h2>سبد خرید خالی است</h2>
+        <a href="#/shop" class="btn btn-primary" style="margin-top:20px">
+          <i class="bi bi-bag"></i> مشاهده محصولات</a>
+      </div></div></section>`;
+    app.innerHTML = publicHeader('cart') + body + publicFooter(); updateCartBadge(); return;
+  }
+  const subtotal = cartTotal();
+  const shipping = subtotal >= 500000 ? 0 : 35000;
+  const total = subtotal + shipping;
+  const itemsHTML = cart.map(item=>{
+    const p = DB.products.find(x=>x.id===item.productId); if(!p) return '';
+    return `<div class="cart-item">
+      <div class="cart-item-img">${productImageHTML(p)}</div>
+      <div class="cart-item-info">
+        <h4>${escapeHTML(p.name)}</h4>
+        <div class="p-price">${formatPrice(p.price)}</div>
+        <div class="qty-box">
+          <button class="qty-btn" onclick="updateQty('${p.id}',-1)">−</button>
+          <span class="qty-num">${toFa(item.qty)}</span>
+          <button class="qty-btn" onclick="updateQty('${p.id}',1)">+</button></div>
+      </div>
+      <div class="cart-item-actions">
+        <span style="font-weight:800;color:var(--accent)">${formatPrice(p.price*item.qty)}</span>
+        <button class="cart-remove" onclick="removeFromCart('${p.id}')"><i class="bi bi-trash"></i></button></div>
+    </div>`;
+  }).join('');
+  body = `<section class="page-hero"><div class="container"><h1>سبد خرید</h1>
+    <div class="breadcrumb"><a href="#/">خانه</a><i class="bi bi-chevron-left"></i><span>سبد خرید</span></div>
+    </div></section>
+    <section class="section"><div class="container"><div class="cart-layout">
+      <div>${itemsHTML}</div>
+      <div class="cart-summary"><h2>خلاصه سفارش</h2>
+        <div class="summary-row"><span>تعداد اقلام</span><span>${toFa(cartCount())}</span></div>
+        <div class="summary-row"><span>جمع کل</span><span>${formatPrice(subtotal)}</span></div>
+        <div class="summary-row"><span>ارسال</span><span>${shipping?formatPrice(shipping):'رایگان'}</span></div>
+        <div class="summary-row total"><span>قابل پرداخت</span><span>${formatPrice(total)}</span></div>
+        <button class="btn btn-primary btn-block" style="margin-top:20px" onclick="navigate('/checkout')">
+          <i class="bi bi-credit-card"></i> ادامه و پرداخت</button>
+        <button class="btn btn-outline btn-block" style="margin-top:10px" onclick="clearCart();render()">
+          <i class="bi bi-x-circle"></i> خالی کردن</button>
+      </div>
+    </div></div></section>`;
+  app.innerHTML = publicHeader('cart') + body + publicFooter();
+  window.scrollTo(0,0); updateCartBadge();
+}
+
+function renderCheckout(app){
+  if(!cart.length){ navigate('/cart'); return; }
+  const subtotal = cartTotal();
+  const shipping = subtotal >= 500000 ? 0 : 35000;
+  const total = subtotal + shipping;
+  const body = `<section class="page-hero"><div class="container"><h1>تکمیل خرید</h1>
+    <div class="breadcrumb"><a href="#/">خانه</a><i class="bi bi-chevron-left"></i>
+      <a href="#/cart">سبد خرید</a><i class="bi bi-chevron-left"></i><span>پرداخت</span></div>
+    </div></section>
+    <section class="section"><div class="container"><div class="checkout-layout">
+      <div class="panel">
+        <h2 style="font-size:18px;font-weight:800;margin-bottom:20px">
+          <i class="bi bi-person-badge" style="color:var(--accent)"></i> اطلاعات گیرنده</h2>
+        <form id="checkoutForm" onsubmit="event.preventDefault();processPayment()">
+          <div class="form-row">
+            <div class="form-group"><label>نام و نام خانوادگی *</label>
+              <input class="input" id="coName" required></div>
+            <div class="form-group"><label>شماره تماس *</label>
+              <input class="input" id="coPhone" required></div>
+          </div>
+          <div class="form-group"><label>ایمیل</label>
+            <input class="input" id="coEmail" type="email" placeholder="برای دریافت تأییدیه سفارش"></div>
+          <div class="form-group"><label>آدرس کامل *</label>
+            <textarea class="textarea" id="coAddress" required></textarea></div>
+          <div class="form-group"><label>یادداشت (اختیاری)</label>
+            <textarea class="textarea" id="coNote" style="min-height:70px"></textarea></div>
+          <h2 style="font-size:18px;font-weight:800;margin:30px 0 20px">
+            <i class="bi bi-credit-card" style="color:var(--accent)"></i> روش پرداخت</h2>
+          <div class="payment-methods">
+            <label class="payment-option selected" onclick="selectPayment(this)">
+              <input type="radio" name="payMethod" value="online" checked>
+              <i class="bi bi-credit-card-2-front"></i>
+              <div><div style="font-weight:700">پرداخت آنلاین</div>
+                <div style="font-size:12px;color:var(--muted)">پرداخت امن از درگاه</div></div></label>
+            <label class="payment-option" onclick="selectPayment(this)">
+              <input type="radio" name="payMethod" value="cod">
+              <i class="bi bi-cash-coin"></i>
+              <div><div style="font-weight:700">پرداخت در محل</div>
+                <div style="font-size:12px;color:var(--muted)">هنگام تحویل کالا</div></div></label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top:24px">
+            <i class="bi bi-lock-fill"></i> پرداخت و ثبت سفارش</button>
+        </form>
+      </div>
+      <div class="cart-summary"><h2>خلاصه سفارش</h2>
+        ${cart.map(i=>{
+          const p = DB.products.find(x=>x.id===i.productId); if(!p) return '';
+          return `<div class="summary-row"><span>${escapeHTML(p.name)} × ${toFa(i.qty)}</span>
+            <span>${formatPrice(p.price*i.qty)}</span></div>`;
+        }).join('')}
+        <div class="summary-row" style="border-top:1px solid var(--border);margin-top:10px;padding-top:14px">
+          <span>جمع کل</span><span>${formatPrice(subtotal)}</span></div>
+        <div class="summary-row"><span>ارسال</span><span>${shipping?formatPrice(shipping):'رایگان'}</span></div>
+        <div class="summary-row total"><span>قابل پرداخت</span><span>${formatPrice(total)}</span></div>
+      </div>
+    </div></div></section>`;
+  app.innerHTML = publicHeader('cart') + body + publicFooter();
+  window.scrollTo(0,0); updateCartBadge();
+}
+function selectPayment(el){
+  $$('.payment-option').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function processPayment(){
+  const name = $('#coName').value.trim();
+  const phone = $('#coPhone').value.trim();
+  const email = $('#coEmail').value.trim();
+  const address = $('#coAddress').value.trim();
+  const method = $('input[name="payMethod"]:checked').value;
+  if(!name || !phone || !address){ toast('اطلاعات را کامل کنید','error'); return; }
+  if(method==='online'){
+    const modal = document.createElement('div');
+    modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px';
+    modal.innerHTML=`<div style="background:#fff;color:#000;border-radius:16px;padding:36px;max-width:420px;width:100%;text-align:center;font-family:Vazirmatn">
+      <div style="font-size:14px;color:#666;margin-bottom:8px">درگاه پرداخت بانکی</div>
+      <div style="font-size:22px;font-weight:800;color:#111;margin-bottom:24px">${formatPrice(cartTotal()+(cartTotal()>=500000?0:35000))}</div>
+      <div style="background:#f0f0f0;padding:16px;border-radius:10px;margin-bottom:20px;font-family:monospace;font-size:13px;text-align:left;direction:ltr">
+        <div>Card: 6037-XXXX-XXXX-1234</div>
+        <div>Terminal: THE8SHOP</div>
+        <div>Ref: ${Date.now().toString().slice(-8)}</div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button id="payCancel" style="flex:1;padding:12px;border:none;border-radius:10px;background:#eee;color:#333;font-weight:700;cursor:pointer">انصراف</button>
+        <button id="payOk" style="flex:1;padding:12px;border:none;border-radius:10px;background:#10b981;color:#fff;font-weight:700;cursor:pointer">پرداخت موفق</button>
+      </div></div>`;
+    document.body.appendChild(modal);
+    $('#payCancel', modal).onclick = ()=>{ modal.remove(); toast('لغو شد','error'); };
+    $('#payOk', modal).onclick = ()=>{ modal.remove(); completeOrder(name,phone,email,address,'online'); };
+  } else completeOrder(name,phone,email,address,'cod');
+}
+function completeOrder(name, phone, email, address, method){
+  const items = cart.map(i=>{
+    const p = DB.products.find(x=>x.id===i.productId);
+    return { productId:i.productId, name:p?.name||'', price:p?.price||0, qty:i.qty };
+  });
+  const subtotal = cartTotal();
+  const shipping = subtotal >= 500000 ? 0 : 35000;
+  const total = subtotal + shipping;
+  const order = {
+    id: 'o' + Date.now().toString().slice(-7),
+    customer: name, phone, email, address,
+    total, status: method==='online'?'completed':'pending',
+    date: todayJalali(), method, items
+  };
+  DB.orders.unshift(order);
+  createBackup('سفارش جدید', false);
+  saveDB();
+
+  // 📧 ایمیل تأییدیه سفارش
+  if(email){
+    const tpl = emailOrderTemplate(order, 'confirmed');
+    sendSimulatedEmail({
+      to: email,
+      subject: tpl.subject,
+      body: tpl.body,
+      orderId: order.id,
+      template: 'order-confirmed',
+      showPreview: false
+    });
+    // ایمیل به مدیر
+    const adminEmail = DB.users.find(u=>u.role==='admin' && u.email)?.email;
+    if(adminEmail && adminEmail !== email){
+      sendSimulatedEmail({
+        to: adminEmail,
+        subject: `🛒 سفارش جدید: ${order.id}`,
+        body: `سفارش جدیدی ثبت شد!\n\nشناسه: ${order.id}\nمشتری: ${order.customer}\nمبلغ: ${formatPrice(order.total)}\nروش: ${order.method==='online'?'آنلاین':'در محل'}`,
+        orderId: order.id,
+        template: 'admin-order',
+        showPreview: false
+      });
+    }
+  }
+
+  clearCart();
+  navigate('/success/' + order.id);
+  render();
+}
+function renderSuccess(app, orderId){
+  const o = DB.orders.find(x=>x.id===orderId);
+  if(!o){ navigate('/'); return; }
+  const body = `<section class="section"><div class="success-page">
+    <div class="success-icon"><i class="bi bi-check-lg"></i></div>
+    <h1>سفارش شما ثبت شد! 🎉</h1>
+    <p>از خرید شما سپاسگزاریم${o.email?` — ایمیل تأییدیه به <strong>${escapeHTML(o.email)}</strong> ارسال شد`:''}</p>
+    <div class="order-info">
+      <div class="row"><span>شماره سفارش</span><span style="font-weight:800">${escapeHTML(o.id)}</span></div>
+      <div class="row"><span>نام گیرنده</span><span>${escapeHTML(o.customer)}</span></div>
+      <div class="row"><span>تلفن</span><span>${escapeHTML(o.phone)}</span></div>
+      <div class="row"><span>تاریخ</span><span>${escapeHTML(o.date)}</span></div>
+      <div class="row"><span>روش پرداخت</span><span>${o.method==='online'?'آنلاین':'در محل'}</span></div>
+      <div class="row"><span>وضعیت</span><span>${orderStatusBadge(o.status)}</span></div>
+      <div class="row"><span>مبلغ کل</span><span>${formatPrice(o.total)}</span></div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="printInvoice('${o.id}')">
+        <i class="bi bi-printer"></i> چاپ فاکتور</button>
+      <a href="#/shop" class="btn btn-outline"><i class="bi bi-bag"></i> ادامه خرید</a>
+      <a href="#/" class="btn btn-ghost"><i class="bi bi-house"></i> صفحه اصلی</a>
+    </div></div></section>`;
+  app.innerHTML = publicHeader('cart') + body + publicFooter();
+  window.scrollTo(0,0);
+}
+
+/* ========================================================================
+   Admin — Login
+   ======================================================================== */
+function renderLogin(app){
+  app.innerHTML = `<div class="login-page"><div class="login-card">
+    <div class="logo"><i class="bi bi-shop-window"></i> پنل مدیریت</div>
+    <p class="sub">برای ادامه وارد شوید</p>
+    <form onsubmit="event.preventDefault();handleLogin()">
+      <div class="form-group"><label>نام کاربری</label>
+        <input class="input" id="loginUser" placeholder="admin" autocomplete="username"></div>
+      <div class="form-group"><label>رمز عبور</label>
+        <input class="input" id="loginPass" type="password" placeholder="••••••" autocomplete="current-password"></div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <i class="bi bi-box-arrow-in-left"></i> ورود به پنل</button>
+    </form>
+    <div class="hint">
+      <strong style="color:var(--text)">کاربران پیش‌فرض:</strong><br>
+      مدیر: <code>admin</code> / <code>admin</code><br>
+      نویسنده: <code>editor</code> / <code>editor</code><br>
+      ناظر: <code>viewer</code> / <code>viewer</code>
+    </div>
+    <div style="text-align:center;margin-top:16px">
+      <a href="#/" style="color:var(--muted);font-size:13px">← بازگشت</a></div>
+  </div></div>`;
+}
+function handleLogin(){
+  const u = $('#loginUser').value.trim();
+  const p = $('#loginPass').value;
+  if(login(u,p)){
+    const user = currentUser();
+    toast(`خوش آمدید ${user.fullName} 👋`,'success');
+    navigate('/admin/dashboard'); render();
+  } else toast('نام کاربری یا رمز عبور اشتباه است','error');
+}
+
+/* ========================================================================
+   Admin — Layout
+   ======================================================================== */
+function adminHeaderHTML(title, subtitle){
+  const u = currentUser();
+  const role = ROLES[u.role];
+  return `<div class="admin-header">
+    <div style="display:flex;align-items:center;gap:16px">
+      <button class="admin-mobile-toggle" onclick="$('.admin-sidebar').classList.toggle('open')">
+        <i class="bi bi-list"></i></button>
+      <div><h1>${escapeHTML(title)}</h1><p>${escapeHTML(subtitle)}</p></div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="cron-status" data-cron-status>
+        <span class="cron-dot"></span><span>کرون فعال</span>
+      </div>
+      <a href="#/" class="btn btn-ghost btn-sm"><i class="bi bi-eye"></i> سایت</a>
+      <div class="admin-user">
+        <div class="admin-user-avatar">${escapeHTML(u.fullName.charAt(0))}</div>
+        <div style="font-size:13px">
+          <div style="font-weight:700">${escapeHTML(u.fullName)}</div>
+          <div style="color:var(--muted);font-size:11px">${escapeHTML(role.label)}</div>
+        </div>
+        <button class="btn btn-icon btn-ghost" onclick="logout()" title="خروج">
+          <i class="bi bi-box-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function adminSidebarHTML(active){
+  const u = currentUser();
+  const unreadEmails = (DB.emails||[]).filter(e=>e.unread).length;
+  const allItems = [
+    { id:'dashboard',  label:'داشبورد',      icon:'bi-speedometer2', perm:'orders' },
+    { id:'products',   label:'محصولات',      icon:'bi-box-seam',     perm:'products' },
+    { id:'categories', label:'دسته‌بندی‌ها', icon:'bi-tags',         perm:'categories' },
+    { id:'posts',      label:'مقالات',       icon:'bi-journal-text', perm:'posts' },
+    { id:'orders',     label:'سفارش‌ها',     icon:'bi-receipt',      perm:'orders' },
+    { id:'emails',     label:'ایمیل‌ها',     icon:'bi-envelope',     perm:'emails',
+      badge: unreadEmails },
+    { id:'users',      label:'کاربران',      icon:'bi-people',       perm:'users' },
+    { id:'backups',    label:'نسخه‌ها',      icon:'bi-clock-history',perm:'backups' },
+    { id:'settings',   label:'تنظیمات',      icon:'bi-gear',         perm:'settings' }
+  ];
+  const items = allItems.filter(it => hasPerm(it.perm));
+  return `<aside class="admin-sidebar">
+    <div class="brand"><i class="bi bi-shop-window"></i> پنل مدیریت</div>
+    <ul class="admin-nav">
+      ${items.map(it=>`<li><a href="#/admin/${it.id}" class="${active===it.id?'active':''}">
+        <i class="bi ${it.icon}"></i> ${it.label}
+        ${it.badge?`<span class="count-pill">${toFa(it.badge)}</span>`:''}
+      </a></li>`).join('')}
+      <li class="divider"></li>
+      <li><a href="#" onclick="resetDB();return false">
+        <i class="bi bi-arrow-counterclockwise"></i> بازنشانی</a></li>
+      <li><a href="#" onclick="logout();return false">
+        <i class="bi bi-box-arrow-right"></i> خروج</a></li>
+    </ul>
+  </aside>`;
+}
+
+function renderAdmin(app, section, subId){
+  const permMap = {
+    dashboard:'orders', products:'products', categories:'categories',
+    posts:'posts', orders:'orders', emails:'emails',
+    users:'users', backups:'backups', settings:'settings'
+  };
+  const reqPerm = permMap[section] || 'orders';
+  if(!hasPerm(reqPerm)){
+    app.innerHTML = `<div class="admin-layout">${adminSidebarHTML(section)}
+      <main class="admin-main">${adminHeaderHTML('دسترسی غیرمجاز','شما به این بخش دسترسی ندارید')}
+        <div class="panel"><div class="empty"><i class="bi bi-shield-x"></i>
+          <h3>دسترسی محدود</h3>
+          <p>نقش کاربری شما اجازه ورود به این بخش را ندارد.</p>
+        </div></div></main></div>`;
+    return;
+  }
+
+  let content = '';
+  if(section==='dashboard')       content = adminDashboard();
+  else if(section==='products'){
+    if(subId==='new') content = adminProductForm();
+    else if(subId)     content = adminProductForm(subId);
+    else               content = adminProducts();
+  }
+  else if(section==='categories') content = adminCategories();
+  else if(section==='posts'){
+    if(subId==='new') content = adminPostForm();
+    else if(subId)     content = adminPostForm(subId);
+    else               content = adminPosts();
+  }
+  else if(section==='orders')     content = adminOrders();
+  else if(section==='emails')     content = adminEmails();
+  else if(section==='users'){
+    if(subId==='new') content = adminUserForm();
+    else if(subId)     content = adminUserForm(subId);
+    else               content = adminUsers();
+  }
+  else if(section==='backups')    content = adminBackups();
+  else if(section==='settings')   content = adminSettings();
+  else                            content = adminDashboard();
+
+  app.innerHTML = `<div class="admin-layout">
+    ${adminSidebarHTML(section)}
+    <main class="admin-main">${content}</main>
+  </div>`;
+
+  if(section==='dashboard') setTimeout(initDashboardCharts, 50);
+  if(section==='backups')   setTimeout(updateCronStatusUI, 50);
+  updateEmailCount();
+}
+
+/* ========================================================================
+   Admin — Dashboard
+   ======================================================================== */
+function adminDashboard(){
+  const totalRevenue = DB.orders.filter(o=>o.status==='completed').reduce((s,o)=>s+o.total,0);
+  const pending = DB.orders.filter(o=>o.status==='pending').length;
+  return `${adminHeaderHTML('داشبورد','خلاصه وضعیت فروشگاه')}
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-icon"><i class="bi bi-box-seam"></i></div>
+        <div class="stat-value">${toFa(DB.products.length)}</div>
+        <div class="stat-label">محصولات</div></div>
+      <div class="stat-card green"><div class="stat-icon"><i class="bi bi-receipt"></i></div>
+        <div class="stat-value">${toFa(DB.orders.length)}</div>
+        <div class="stat-label">سفارش‌ها</div></div>
+      <div class="stat-card blue"><div class="stat-icon"><i class="bi bi-currency-exchange"></i></div>
+        <div class="stat-value">${formatPrice(totalRevenue)}</div>
+        <div class="stat-label">درآمد</div></div>
+      <div class="stat-card purple"><div class="stat-icon"><i class="bi bi-people"></i></div>
+        <div class="stat-value">${toFa(DB.users.length)}</div>
+        <div class="stat-label">کاربران</div></div>
+    </div>
+    <div class="panel" style="background:linear-gradient(135deg,rgba(230,57,70,.08),transparent)">
+      <div class="panel-head">
+        <div><h2>📄 گزارش کامل PDF</h2>
+          <p>گزارش کامل فروشگاه با نمودار، سفارش‌ها و محصولات — قابل چاپ و آرشیو</p></div>
+        <button class="btn btn-primary" onclick="exportDashboardPDF()">
+          <i class="bi bi-file-earmark-pdf"></i> دانلود گزارش PDF</button>
+      </div>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card"><h3><i class="bi bi-graph-up-arrow"></i> فروش ۶ ماه اخیر</h3>
+        <div class="chart-container"><canvas id="salesChart"></canvas></div></div>
+      <div class="chart-card"><h3><i class="bi bi-pie-chart"></i> محصولات به تفکیک دسته</h3>
+        <div class="chart-container"><canvas id="catChart"></canvas></div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <div><h2>آخرین سفارش‌ها</h2>
+          <p>${pending>0?`${toFa(pending)} سفارش در انتظار`:'همه بررسی شده‌اند'}</p></div>
+        <a href="#/admin/orders" class="btn btn-ghost btn-sm">همه</a>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>شناسه</th><th>مشتری</th><th>مبلغ</th><th>وضعیت</th><th>تاریخ</th></tr></thead>
+        <tbody>${DB.orders.slice(0,5).map(o=>`<tr>
+          <td><code>${escapeHTML(o.id)}</code></td>
+          <td>${escapeHTML(o.customer)}</td>
+          <td>${formatPrice(o.total)}</td>
+          <td>${orderStatusBadge(o.status)}</td>
+          <td>${escapeHTML(o.date)}</td></tr>`).join('')}</tbody>
+      </table></div>
+    </div>`;
+}
+let salesChartInst=null, catChartInst=null;
+function initDashboardCharts(){
+  if(typeof Chart==='undefined') return;
+  if(salesChartInst) salesChartInst.destroy();
+  if(catChartInst) catChartInst.destroy();
+  Chart.defaults.font.family='Vazirmatn, Tahoma, sans-serif';
+  Chart.defaults.color='#9a9aa0';
+  const s = $('#salesChart');
+  if(s){
+    salesChartInst = new Chart(s.getContext('2d'),{
+      type:'bar',
+      data:{ labels:DB.salesHistory.map(x=>x.month),
+        datasets:[{ label:'فروش', data:DB.salesHistory.map(x=>x.amount),
+          backgroundColor:'rgba(230,57,70,.7)', borderColor:'#e63946', borderWidth:2, borderRadius:8 }]},
+      options:{ responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false},
+          tooltip:{callbacks:{label:ctx=>formatPrice(ctx.parsed.y)}}},
+        scales:{ y:{beginAtZero:true, grid:{color:'rgba(255,255,255,.05)'},
+          ticks:{callback:v=>(v/1000000).toFixed(0)+'م'}}, x:{grid:{display:false}}}}
+    });
+  }
+  const c = $('#catChart');
+  if(c){
+    const catData = DB.categories.map(cat=>{
+      return { label:cat.name, count:DB.products.filter(p=>p.categoryId===cat.id).length, color:cat.color };
+    });
+    catChartInst = new Chart(c.getContext('2d'),{
+      type:'doughnut',
+      data:{ labels:catData.map(x=>x.label),
+        datasets:[{ data:catData.map(x=>x.count), backgroundColor:catData.map(x=>x.color),
+          borderColor:'#16161a', borderWidth:3, hoverOffset:10 }]},
+      options:{ responsive:true, maintainAspectRatio:false, cutout:'65%',
+        plugins:{ legend:{ position:'bottom', labels:{padding:14, boxWidth:12, font:{size:12}}} }}
+    });
+  }
+}
+function orderStatusBadge(status){
+  const map = {
+    pending:'<span class="badge badge-gold">در انتظار</span>',
+    shipped:'<span class="badge badge-blue">ارسال شده</span>',
+    completed:'<span class="badge badge-green">تکمیل شده</span>',
+    cancelled:'<span class="badge badge-red">لغو شده</span>'
+  };
+  return map[status] || '<span class="badge">نامشخص</span>';
+}
+
+/* ========================================================================
+   Admin — Products
+   ======================================================================== */
+function adminProducts(){
+  const w = canWrite('products');
+  return `${adminHeaderHTML('محصولات',`${toFa(DB.products.length)} محصول`)}
+  <div class="panel">
+    <div class="panel-head">
+      <div><h2>لیست محصولات</h2>
+        <p>${w?'با دکمه ✏️ ویرایش سریع درجا | 📷 اسکن بارکد':'شما فقط اجازه مشاهده دارید'}</p></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-info" onclick="openBarcodeScanner()">
+          <i class="bi bi-upc-scan"></i> اسکن بارکد</button>
+        ${w?`<a href="#/admin/products/new" class="btn btn-primary">
+          <i class="bi bi-plus-lg"></i> محصول جدید</a>`:''}
+      </div>
+    </div>
+    ${DB.products.length?`
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th>محصول</th><th>دسته</th><th>قیمت</th><th>قدیم</th><th>امتیاز</th>
+        <th>بارکد</th><th>برچسب</th>${w?'<th>عملیات</th>':''}
+      </tr></thead>
+      <tbody>
+        ${DB.products.map(p=>{
+          const cat = DB.categories.find(c=>c.id===p.categoryId);
+          return `
+          <tr id="prow-${p.id}">
+            <td><div class="table-product">
+              <div class="table-product-icon">${productImageHTML(p)}</div>
+              <div><div style="font-weight:700">${escapeHTML(p.name)}</div>
+                <div style="font-size:12px;color:var(--muted)">${escapeHTML(p.id)}</div></div>
+            </div></td>
+            <td>${escapeHTML(cat?.name||'—')}</td>
+            <td><strong style="color:var(--accent)">${formatPrice(p.price)}</strong></td>
+            <td>${p.oldPrice?`<del style="color:var(--muted);font-size:12px">${formatPrice(p.oldPrice)}</del>`:'—'}</td>
+            <td><span style="color:var(--gold)">${starsHTML(p.stars)}</span></td>
+            <td><code style="font-size:11px;direction:ltr;color:var(--muted)">${escapeHTML(p.barcode||'—')}</code></td>
+            <td>${p.badge?`<span class="badge ${p.badgeType==='sale'?'badge-gold':''}">${escapeHTML(p.badge)}</span>`:'—'}</td>
+            ${w?`<td><div class="row-actions">
+              <button class="btn btn-ghost btn-sm" onclick="startInlineEdit('${p.id}')" title="ویرایش سریع">
+                <i class="bi bi-pencil-square"></i></button>
+              <a href="#/admin/products/${p.id}" class="btn btn-ghost btn-sm" title="ویرایش کامل">
+                <i class="bi bi-pencil"></i></a>
+              <button class="btn btn-danger btn-sm" onclick="deleteProduct('${p.id}')" title="حذف">
+                <i class="bi bi-trash"></i></button>
+            </div></td>`:''}
+          </tr>
+          <tr id="pedit-${p.id}" style="display:none">
+            <td colspan="${w?8:7}" style="background:rgba(230,57,70,.05);padding:16px">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:12px">
+                <div><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">نام محصول</label>
+                  <input class="inline-input" id="ie-name-${p.id}" value="${escapeHTML(p.name)}"></div>
+                <div><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">قیمت</label>
+                  <input class="inline-input inline-num" id="ie-price-${p.id}" type="number" value="${p.price}"></div>
+                <div><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">قیمت قدیم</label>
+                  <input class="inline-input inline-num" id="ie-old-${p.id}" type="number" value="${p.oldPrice||0}"></div>
+                <div><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">امتیاز</label>
+                  <input class="inline-input inline-num" id="ie-stars-${p.id}" type="number" step="0.5" min="0" max="5" value="${p.stars||5}"></div>
+                <div><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">بارکد</label>
+                  <input class="inline-input" id="ie-barcode-${p.id}" value="${escapeHTML(p.barcode||'')}"></div>
+                <div><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">برچسب</label>
+                  <input class="inline-input" id="ie-badge-${p.id}" value="${escapeHTML(p.badge||'')}"></div>
+                <div><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">دسته‌بندی</label>
+                  <select class="inline-input" id="ie-cat-${p.id}">
+                    ${DB.categories.map(c=>`<option value="${c.id}" ${c.id===p.categoryId?'selected':''}>${escapeHTML(c.name)}</option>`).join('')}
+                  </select></div>
+              </div>
+              <div class="inline-save-bar">
+                <button class="btn btn-ghost btn-sm" onclick="cancelInlineEdit('${p.id}')">
+                  <i class="bi bi-x"></i> انصراف</button>
+                <button class="btn btn-success btn-sm" onclick="saveInlineEdit('${p.id}')">
+                  <i class="bi bi-check-lg"></i> ذخیره سریع</button>
+              </div>
+            </td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table></div>`:`
+    <div class="empty"><i class="bi bi-box"></i><h3>محصولی وجود ندارد</h3></div>`}
+  </div>`;
+}
+function startInlineEdit(id){
+  const row = $(`#prow-${id}`); const edit = $(`#pedit-${id}`);
+  if(row) row.style.display = 'none';
+  if(edit) edit.style.display = 'table-row';
+}
+function cancelInlineEdit(id){
+  const row = $(`#prow-${id}`); const edit = $(`#pedit-${id}`);
+  if(row) row.style.display = '';
+  if(edit) edit.style.display = 'none';
+}
+function saveInlineEdit(id){
+  const p = DB.products.find(x=>x.id===id);
+  if(!p){ toast('محصول یافت نشد','error'); return; }
+  const name = $(`#ie-name-${id}`).value.trim();
+  const price = +$(`#ie-price-${id}`).value;
+  const oldPrice = +$(`#ie-old-${id}`).value || 0;
+  const stars = +$(`#ie-stars-${id}`).value || 5;
+  const barcode = $(`#ie-barcode-${id}`).value.trim();
+  const badge = $(`#ie-badge-${id}`).value.trim();
+  const categoryId = $(`#ie-cat-${id}`).value;
+  if(!name || !price){ toast('نام و قیمت الزامی است','error'); return; }
+  p.name = name; p.price = price; p.oldPrice = oldPrice;
+  p.stars = stars; p.badge = badge; p.barcode = barcode; p.categoryId = categoryId;
+  if(badge && !p.badgeType) p.badgeType = badge.includes('تخفیف') ? 'sale' : '';
+  createBackup(`ویرایش سریع: ${name}`, false);
+  saveDB(); toast('✅ تغییرات ذخیره شد','success'); render();
+}
+function deleteProduct(id){
+  if(!canWrite('products')){ toast('دسترسی ندارید','error'); return; }
+  if(!confirm('این محصول حذف شود؟')) return;
+  createBackup('حذف محصول', false);
+  DB.products = DB.products.filter(x=>x.id!==id);
+  saveDB(); toast('حذف شد','success'); render();
+}
+function adminProductForm(id){
+  if(!canWrite('products')){ navigate('/admin/products'); return ''; }
+  const isEdit = !!id;
+  const p = isEdit ? DB.products.find(x=>x.id===id) : {
+    name:'', price:0, oldPrice:0, categoryId:DB.categories[0]?.id||'',
+    icon:'bi-box', image:'', badge:'', badgeType:'', stars:5, description:'', barcode:''
+  };
+  if(isEdit && !p){ navigate('/admin/products'); return ''; }
+  const icons = ['bi-box','bi-phone','bi-laptop','bi-headphones','bi-smartwatch','bi-camera',
+                 'bi-mouse','bi-keyboard','bi-tv','bi-speaker','bi-watch','bi-controller'];
+  return `${adminHeaderHTML(isEdit?'ویرایش محصول':'محصول جدید', isEdit?p.name:'افزودن محصول تازه')}
+  <div class="panel"><form onsubmit="event.preventDefault();saveProduct('${id||''}')">
+    <div class="form-group"><label>نام محصول *</label>
+      <input class="input" id="pName" required value="${escapeHTML(p.name)}"></div>
+    <div class="form-row">
+      <div class="form-group"><label>قیمت (تومان) *</label>
+        <input class="input" id="pPrice" type="number" required value="${p.price}"></div>
+      <div class="form-group"><label>قیمت قدیم</label>
+        <input class="input" id="pOldPrice" type="number" value="${p.oldPrice}"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>دسته‌بندی</label>
+        <select class="select" id="pCategory">
+          ${DB.categories.map(c=>`<option value="${c.id}" ${c.id===p.categoryId?'selected':''}>${escapeHTML(c.name)}</option>`).join('')}
+        </select></div>
+      <div class="form-group"><label>امتیاز</label>
+        <input class="input" id="pStars" type="number" step="0.5" min="0" max="5" value="${p.stars}"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>بارکد محصول</label>
+        <div style="display:flex;gap:8px">
+          <input class="input" id="pBarcode" value="${escapeHTML(p.barcode||'')}" placeholder="مثلاً: T8S-P1-2850" style="direction:ltr">
+          <button type="button" class="btn btn-info btn-sm" onclick="scanForProductForm()" title="اسکن بارکد">
+            <i class="bi bi-upc-scan"></i></button>
+        </div>
+        <div class="form-hint">می‌توانید با دوربین بارکد محصول را اسکن کنید</div>
+      </div>
+      <div class="form-group"><label>تولید بارکد خودکار</label>
+        <button type="button" class="btn btn-ghost btn-sm btn-block" onclick="autoBarcode()">
+          <i class="bi bi-magic"></i> تولید خودکار</button>
+      </div>
+    </div>
+    <div class="form-group"><label>🖼️ تصویر محصول</label>
+      <div class="img-upload" onclick="$('#pImageFile').click()">
+        <input type="file" id="pImageFile" accept="image/*" onchange="handleProductImage(event)">
+        <div class="u-icon"><i class="bi bi-cloud-arrow-up"></i></div>
+        <div class="u-text">برای انتخاب تصویر کلیک کنید</div>
+        <div class="u-text" style="font-size:11px">JPG/PNG/WebP — حداکثر ۵۰۰KB</div>
+      </div>
+      <div id="imgPreview" class="img-preview" style="text-align:center">
+        ${p.image?`<img src="${p.image}"><br><span class="remove-img" onclick="removeProductImage(event)">🗑️ حذف</span>`:''}
+      </div>
+      <input type="hidden" id="pImage" value="${p.image||''}">
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>برچسب</label>
+        <input class="input" id="pBadge" value="${escapeHTML(p.badge)}"></div>
+      <div class="form-group"><label>نوع برچسب</label>
+        <select class="select" id="pBadgeType">
+          <option value="" ${p.badgeType===''?'selected':''}>عادی</option>
+          <option value="sale" ${p.badgeType==='sale'?'selected':''}>تخفیف</option>
+        </select></div>
+    </div>
+    <div class="form-group"><label>آیکون</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;padding:12px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px">
+        ${icons.map(ic=>`<label style="cursor:pointer;display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;border:1.5px solid ${p.icon===ic?'var(--accent)':'var(--border)'};background:${p.icon===ic?'rgba(230,57,70,.1)':'transparent'}">
+          <input type="radio" name="pIcon" value="${ic}" ${p.icon===ic?'checked':''} style="margin:0">
+          <i class="bi ${ic}" style="font-size:18px"></i></label>`).join('')}
+      </div></div>
+    <div class="form-group"><label>توضیحات</label>
+      <textarea class="textarea" id="pDesc">${escapeHTML(p.description||'')}</textarea></div>
+    <div style="display:flex;gap:10px">
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-check-lg"></i> ${isEdit?'ذخیره':'افزودن'}</button>
+      <a href="#/admin/products" class="btn btn-outline">انصراف</a>
+    </div>
+  </form></div>`;
+}
+function autoBarcode(){
+  const code = 'T8S-' + Date.now().toString(36).toUpperCase() + '-' + Math.floor(Math.random()*9000+1000);
+  $('#pBarcode').value = code;
+  toast('بارکد تولید شد: ' + code,'success');
+}
+function scanForProductForm(){
+  if(typeof Html5Qrcode === 'undefined'){ toast('کتابخانه اسکن بارگذاری نشد','error'); return; }
+  showModal(`
+    <div class="scanner-frame"><div id="qrReader"></div>
+      <div class="scan-overlay"><div class="scan-target"></div></div></div>
+    <p style="text-align:center;color:var(--muted);margin-top:14px;font-size:13px">بارکد را در کادر قرار دهید</p>
+  `, {
+    title:'📷 اسکن بارکد',
+    closeText:'انصراف',
+    maxWidth:'500px',
+    onClose: stopBarcodeScanner
+  });
+  setTimeout(()=>{
+    try{
+      qrScanner = new Html5Qrcode('qrReader', { verbose:false });
+      qrScanner.start(
+        { facingMode:'environment' },
+        { fps:10, qrbox:{ width:250, height:150 } },
+        (decodedText) => {
+          const code = String(decodedText||'').trim();
+          stopBarcodeScanner();
+          closeModal();
+          $('#pBarcode').value = code;
+          toast(`بارکد: ${code}`,'success');
+        },
+        ()=>{}
+      ).catch(err=>{
+        toast('دسترسی به دوربین ممکن نیست','error');
+        const el = document.getElementById('qrReader');
+        if(el) el.innerHTML = '<div style="padding:30px;text-align:center;color:#f87171">'+
+          '<i class="bi bi-camera-video-off" style="font-size:40px"></i>'+
+          '<p style="margin-top:12px">دوربین در دسترس نیست</p></div>';
+      });
+    }catch(e){ console.error(e); }
+  }, 250);
+}
+function handleProductImage(event){
+  const file = event.target.files[0]; if(!file) return;
+  if(file.size > 500*1024){ toast('حجم بیشتر از ۵۰۰KB است','error'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    $('#pImage').value = e.target.result;
+    $('#imgPreview').innerHTML = `<img src="${e.target.result}"><br><span class="remove-img" onclick="removeProductImage(event)">🗑️ حذف</span>`;
+    toast('تصویر بارگذاری شد ✅','success');
+  };
+  reader.readAsDataURL(file);
+}
+function removeProductImage(event){
+  if(event) event.stopPropagation();
+  $('#pImage').value = '';
+  $('#imgPreview').innerHTML = '';
+  const f = $('#pImageFile'); if(f) f.value='';
+  toast('تصویر حذف شد','info');
+}
+function saveProduct(id){
+  if(!canWrite('products')){ toast('دسترسی ندارید','error'); return; }
+  const icon = $('input[name="pIcon"]:checked')?.value || 'bi-box';
+  const data = {
+    name: $('#pName').value.trim(),
+    price: +$('#pPrice').value,
+    oldPrice: +$('#pOldPrice').value || 0,
+    categoryId: $('#pCategory').value,
+    stars: +$('#pStars').value || 5,
+    barcode: $('#pBarcode').value.trim(),
+    badge: $('#pBadge').value.trim(),
+    badgeType: $('#pBadgeType').value,
+    icon, image: $('#pImage').value || '',
+    description: $('#pDesc').value.trim()
+  };
+  if(!data.name || !data.price){ toast('نام و قیمت الزامی است','error'); return; }
+  if(id){
+    const idx = DB.products.findIndex(x=>x.id===id);
+    DB.products[idx] = { ...DB.products[idx], ...data };
+    createBackup(`ویرایش محصول: ${data.name}`, false);
+  } else {
+    DB.products.unshift({ id: uid('p'), ...data });
+    createBackup(`محصول جدید: ${data.name}`, false);
+  }
+  saveDB(); toast('ذخیره شد','success');
+  navigate('/admin/products'); render();
+}
+
+/* ========================================================================
+   Admin — Categories
+   ======================================================================== */
+function adminCategories(){
+  const w = canWrite('categories');
+  return `${adminHeaderHTML('دسته‌بندی‌ها',`${toFa(DB.categories.length)} دسته‌بندی`)}
+  <div class="panel">
+    <div class="panel-head">
+      <div><h2>لیست دسته‌بندی‌ها</h2></div>
+      ${w?`<button class="btn btn-primary" onclick="showCategoryForm()">
+        <i class="bi bi-plus-lg"></i> دسته جدید</button>`:''}
+    </div>
+    <div id="catFormWrap" style="display:none;margin-bottom:20px;padding:20px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
+      <form onsubmit="event.preventDefault();saveCategory()">
+        <div class="form-row">
+          <div class="form-group"><label>نام</label><input class="input" id="cName" required></div>
+          <div class="form-group"><label>آیکون</label><input class="input" id="cIcon" value="bi-tag"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>رنگ</label><input class="input" id="cColor" type="color" value="#e63946"></div>
+          <div class="form-group"><label>تعداد نمایشی</label><input class="input" id="cCount" type="number" value="0"></div>
+        </div>
+        <input type="hidden" id="cId">
+        <div style="display:flex;gap:10px">
+          <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> ذخیره</button>
+          <button type="button" class="btn btn-outline" onclick="$('#catFormWrap').style.display='none'">انصراف</button>
+        </div>
+      </form>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>آیکون</th><th>نام</th><th>تعداد</th>${w?'<th>عملیات</th>':''}</tr></thead>
+      <tbody>${DB.categories.map(c=>`<tr>
+        <td><div class="table-product-icon" style="background:linear-gradient(135deg,${c.color},${c.color}aa);color:#fff">
+          <i class="bi ${c.icon}"></i></div></td>
+        <td><strong>${escapeHTML(c.name)}</strong></td>
+        <td>${toFa(c.count)}</td>
+        ${w?`<td><div class="row-actions">
+          <button class="btn btn-ghost btn-sm" onclick="editCategory('${c.id}')"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-danger btn-sm" onclick="deleteCategory('${c.id}')"><i class="bi bi-trash"></i></button>
+        </div></td>`:''}
+      </tr>`).join('')}</tbody>
+    </table></div>
+  </div>`;
+}
+function showCategoryForm(){
+  $('#catFormWrap').style.display='block';
+  $('#cId').value=''; $('#cName').value=''; $('#cIcon').value='bi-tag';
+  $('#cColor').value='#e63946'; $('#cCount').value='0';
+}
+function editCategory(id){
+  const c = DB.categories.find(x=>x.id===id); if(!c) return;
+  $('#catFormWrap').style.display='block';
+  $('#cId').value=c.id; $('#cName').value=c.name; $('#cIcon').value=c.icon;
+  $('#cColor').value=c.color; $('#cCount').value=c.count;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function saveCategory(){
+  if(!canWrite('categories')) return;
+  const id = $('#cId').value;
+  const data = { name:$('#cName').value.trim(), icon:$('#cIcon').value.trim()||'bi-tag',
+    color:$('#cColor').value, count:+$('#cCount').value||0 };
+  if(!data.name) return;
+  if(id){
+    const idx = DB.categories.findIndex(x=>x.id===id);
+    DB.categories[idx] = { ...DB.categories[idx], ...data };
+  } else DB.categories.push({ id: uid('c'), ...data });
+  createBackup('ذخیره دسته‌بندی', false);
+  saveDB(); toast('ذخیره شد','success'); render();
+}
+function deleteCategory(id){
+  if(!canWrite('categories')) return;
+  if(!confirm('حذف شود؟')) return;
+  createBackup('حذف دسته‌بندی', false);
+  DB.categories = DB.categories.filter(x=>x.id!==id);
+  saveDB(); toast('حذف شد','success'); render();
+}
+
+/* ========================================================================
+   Admin — Posts
+   ======================================================================== */
+function adminPosts(){
+  const w = canWrite('posts');
+  return `${adminHeaderHTML('مقالات',`${toFa(DB.posts.length)} مقاله`)}
+  <div class="panel">
+    <div class="panel-head">
+      <div><h2>لیست مقالات</h2></div>
+      ${w?`<a href="#/admin/posts/new" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> مقاله جدید</a>`:''}
+    </div>
+    ${DB.posts.length?`<div class="table-wrap"><table>
+      <thead><tr><th>عنوان</th><th>نویسنده</th><th>تاریخ</th><th>دیدگاه</th>${w?'<th>عملیات</th>':''}</tr></thead>
+      <tbody>${DB.posts.map(p=>`<tr>
+        <td><strong>${escapeHTML(p.title)}</strong></td>
+        <td>${escapeHTML(p.author)}</td>
+        <td>${escapeHTML(p.date)}</td>
+        <td>${toFa(p.comments||0)}</td>
+        ${w?`<td><div class="row-actions">
+          <a href="#/admin/posts/${p.id}" class="btn btn-ghost btn-sm"><i class="bi bi-pencil"></i></a>
+          <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')"><i class="bi bi-trash"></i></button>
+        </div></td>`:''}
+      </tr>`).join('')}</tbody>
+    </table></div>`:`<div class="empty"><i class="bi bi-journal"></i><h3>مقاله‌ای نیست</h3></div>`}
+  </div>`;
+}
+function adminPostForm(id){
+  if(!canWrite('posts')){ navigate('/admin/posts'); return ''; }
+  const isEdit = !!id;
+  const b = isEdit ? DB.posts.find(x=>x.id===id) : {
+    title:'', excerpt:'', content:'', author:currentUser().fullName,
+    date:todayJalali(), icon:'bi-file-text', comments:0
+  };
+  if(isEdit && !b){ navigate('/admin/posts'); return ''; }
+  const icons = ['bi-file-text','bi-lightbulb','bi-headphones','bi-cpu','bi-phone','bi-book','bi-camera','bi-star'];
+  return `${adminHeaderHTML(isEdit?'ویرایش مقاله':'مقاله جدید', isEdit?b.title:'نوشتن مقاله')}
+  <div class="panel"><form onsubmit="event.preventDefault();savePost('${id||''}')">
+    <div class="form-group"><label>عنوان *</label>
+      <input class="input" id="bTitle" required value="${escapeHTML(b.title)}"></div>
+    <div class="form-row">
+      <div class="form-group"><label>نویسنده</label>
+        <input class="input" id="bAuthor" value="${escapeHTML(b.author)}"></div>
+      <div class="form-group"><label>تاریخ</label>
+        <input class="input" id="bDate" value="${escapeHTML(b.date)}"></div>
+    </div>
+    <div class="form-group"><label>خلاصه *</label>
+      <textarea class="textarea" id="bExcerpt" required>${escapeHTML(b.excerpt)}</textarea></div>
+    <div class="form-group"><label>متن کامل</label>
+      <textarea class="textarea" id="bContent" style="min-height:200px">${escapeHTML(b.content)}</textarea></div>
+    <div class="form-group"><label>آیکون</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;padding:12px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px">
+        ${icons.map(ic=>`<label style="cursor:pointer;display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;border:1.5px solid ${b.icon===ic?'var(--accent)':'var(--border)'};background:${b.icon===ic?'rgba(230,57,70,.1)':'transparent'}">
+          <input type="radio" name="bIcon" value="${ic}" ${b.icon===ic?'checked':''} style="margin:0">
+          <i class="bi ${ic}"></i></label>`).join('')}
+      </div></div>
+    <div style="display:flex;gap:10px">
+      <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> ${isEdit?'ذخیره':'انتشار'}</button>
+      <a href="#/admin/posts" class="btn btn-outline">انصراف</a>
+    </div>
+  </form></div>`;
+}
+function savePost(id){
+  if(!canWrite('posts')) return;
+  const icon = $('input[name="bIcon"]:checked')?.value || 'bi-file-text';
+  const data = { title:$('#bTitle').value.trim(), author:$('#bAuthor').value.trim()||'مدیر',
+    date:$('#bDate').value.trim(), excerpt:$('#bExcerpt').value.trim(),
+    content:$('#bContent').value.trim(), icon };
+  if(!data.title || !data.excerpt){ toast('عنوان و خلاصه الزامی است','error'); return; }
+  if(id){
+    const idx = DB.posts.findIndex(x=>x.id===id);
+    DB.posts[idx] = { ...DB.posts[idx], ...data };
+  } else DB.posts.unshift({ id: uid('b'), ...data, comments:0 });
+  createBackup('ذخیره مقاله', false);
+  saveDB(); toast('ذخیره شد','success');
+  navigate('/admin/posts'); render();
+}
+function deletePost(id){
+  if(!canWrite('posts')) return;
+  if(!confirm('حذف شود؟')) return;
+  createBackup('حذف مقاله', false);
+  DB.posts = DB.posts.filter(x=>x.id!==id);
+  saveDB(); toast('حذف شد','success'); render();
+}
+
+/* ========================================================================
+   Admin — Orders
+   ======================================================================== */
+let orderFilters = { search:'', status:'', from:'', to:'', sort:'date-desc' };
+
+function getFilteredOrders(){
+  let list = [...DB.orders];
+  const f = orderFilters;
+  if(f.search){
+    const q = f.search.toLowerCase();
+    list = list.filter(o =>
+      o.customer.toLowerCase().includes(q) ||
+      o.phone.includes(q) ||
+      o.id.toLowerCase().includes(q) ||
+      (o.items||[]).some(it => (it.name||'').toLowerCase().includes(q))
+    );
+  }
+  if(f.status) list = list.filter(o=>o.status === f.status);
+  if(f.from)   list = list.filter(o=>o.date >= f.from);
+  if(f.to)     list = list.filter(o=>o.date <= f.to);
+  list.sort((a,b)=>{
+    if(f.sort==='date-desc') return b.date.localeCompare(a.date);
+    if(f.sort==='date-asc')  return a.date.localeCompare(b.date);
+    if(f.sort==='total-desc')return b.total - a.total;
+    if(f.sort==='total-asc') return a.total - b.total;
+    return 0;
+  });
+  return list;
+}
+
+function adminOrders(){
+  const w = canWrite('orders');
+  const filtered = getFilteredOrders();
+  const totalAmt = filtered.reduce((s,o)=>s+o.total,0);
+  return `${adminHeaderHTML('سفارش‌ها',`${toFa(DB.orders.length)} سفارش کل`)}
+  <div class="panel">
+    <div class="panel-head">
+      <div><h2>لیست سفارش‌ها</h2><p>جستجو، فیلتر، چاپ فاکتور و خروجی</p></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-info" onclick="openBarcodeScanner()">
+          <i class="bi bi-upc-scan"></i> اسکن بارکد</button>
+        <button class="btn btn-purple" onclick="exportDashboardPDF()">
+          <i class="bi bi-file-earmark-pdf"></i> گزارش PDF</button>
+        <button class="btn btn-success" onclick="exportOrdersCSV()">
+          <i class="bi bi-file-earmark-excel"></i> خروجی CSV</button>
+      </div>
+    </div>
+
+    <div class="filters-bar">
+      <div class="filter-item">
+        <label>🔍 جستجو (نام، تلفن، شناسه، محصول)</label>
+        <input class="input" id="fSearch" placeholder="جستجو..." value="${escapeHTML(orderFilters.search)}"
+          oninput="applyOrderFilters()">
+      </div>
+      <div class="filter-item">
+        <label>وضعیت</label>
+        <select class="select" id="fStatus" onchange="applyOrderFilters()">
+          <option value="">همه</option>
+          <option value="pending"   ${orderFilters.status==='pending'?'selected':''}>در انتظار</option>
+          <option value="shipped"   ${orderFilters.status==='shipped'?'selected':''}>ارسال شده</option>
+          <option value="completed" ${orderFilters.status==='completed'?'selected':''}>تکمیل شده</option>
+          <option value="cancelled" ${orderFilters.status==='cancelled'?'selected':''}>لغو شده</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label>از تاریخ</label>
+        <input class="input" id="fFrom" placeholder="۱۴۰۳/۰۷/۰۱"
+          value="${escapeHTML(orderFilters.from)}" onchange="applyOrderFilters()">
+      </div>
+      <div class="filter-item">
+        <label>تا تاریخ</label>
+        <input class="input" id="fTo" placeholder="۱۴۰۳/۰۷/۳۰"
+          value="${escapeHTML(orderFilters.to)}" onchange="applyOrderFilters()">
+      </div>
+      <div class="filter-item">
+        <label>مرتب‌سازی</label>
+        <select class="select" id="fSort" onchange="applyOrderFilters()">
+          <option value="date-desc"  ${orderFilters.sort==='date-desc'?'selected':''}>جدیدترین</option>
+          <option value="date-asc"   ${orderFilters.sort==='date-asc'?'selected':''}>قدیمی‌ترین</option>
+          <option value="total-desc" ${orderFilters.sort==='total-desc'?'selected':''}>بیشترین مبلغ</option>
+          <option value="total-asc"  ${orderFilters.sort==='total-asc'?'selected':''}>کمترین مبلغ</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="results-info">
+      <div><strong>${toFa(filtered.length)}</strong> سفارش — مجموع: <strong style="color:var(--accent)">${formatPrice(totalAmt)}</strong></div>
+      ${(orderFilters.search||orderFilters.status||orderFilters.from||orderFilters.to)?
+        `<button class="btn btn-ghost btn-xs" onclick="clearOrderFilters()">
+          <i class="bi bi-x-circle"></i> پاک کردن فیلترها</button>`:''}
+    </div>
+
+    ${filtered.length?`<div class="table-wrap"><table>
+      <thead><tr>
+        <th>شناسه</th><th>مشتری</th><th>تلفن</th><th>اقلام</th>
+        <th>مبلغ</th><th>روش</th><th>وضعیت</th><th>تاریخ</th><th>عملیات</th>
+      </tr></thead>
+      <tbody>${filtered.map(o=>`<tr>
+        <td><code>${escapeHTML(o.id)}</code></td>
+        <td><strong>${escapeHTML(o.customer)}</strong>${o.email?`<div style="font-size:11px;color:var(--muted)">${escapeHTML(o.email)}</div>`:''}</td>
+        <td>${escapeHTML(o.phone)}</td>
+        <td>${toFa(o.items?.reduce((s,i)=>s+i.qty,0)||0)}</td>
+        <td><strong style="color:var(--accent)">${formatPrice(o.total)}</strong></td>
+        <td><span class="badge ${o.method==='online'?'badge-blue':'badge-gold'}">
+          ${o.method==='online'?'آنلاین':'در محل'}</span></td>
+        <td>${orderStatusBadge(o.status)}</td>
+        <td>${escapeHTML(o.date)}</td>
+        <td>
+          <div class="row-actions">
+            <button class="btn btn-ghost btn-sm" onclick="printInvoice('${o.id}')" title="چاپ فاکتور">
+              <i class="bi bi-printer"></i></button>
+            <button class="btn btn-info btn-sm" onclick="emailOrder('${o.id}')" title="ارسال ایمیل">
+              <i class="bi bi-envelope"></i></button>
+            ${w?`<select class="select" style="padding:4px 8px;font-size:11px;width:auto"
+              onchange="updateOrderStatus('${o.id}', this.value)">
+              <option value="pending"   ${o.status==='pending'?'selected':''}>در انتظار</option>
+              <option value="shipped"   ${o.status==='shipped'?'selected':''}>ارسال</option>
+              <option value="completed" ${o.status==='completed'?'selected':''}>تکمیل</option>
+              <option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو</option>
+            </select>`:''}
+          </div>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>`:`<div class="empty"><i class="bi bi-search"></i>
+      <h3>سفارشی یافت نشد</h3><p>فیلترها را تغییر دهید.</p></div>`}
+  </div>`;
+}
+
+function applyOrderFilters(){
+  orderFilters.search = $('#fSearch').value.trim();
+  orderFilters.status = $('#fStatus').value;
+  orderFilters.from   = $('#fFrom').value.trim();
+  orderFilters.to     = $('#fTo').value.trim();
+  orderFilters.sort   = $('#fSort').value;
+  render();
+}
+function clearOrderFilters(){
+  orderFilters = { search:'', status:'', from:'', to:'', sort:'date-desc' };
+  render();
+}
+function updateOrderStatus(id, status){
+  if(!canWrite('orders')){ toast('دسترسی ندارید','error'); return; }
+  const o = DB.orders.find(x=>x.id===id);
+  if(o){
+    o.status = status; saveDB();
+    toast('وضعیت به‌روز شد','success');
+    // اگر ارسال شد ایمیل بفرست
+    if(status === 'shipped' && o.email){
+      const tpl = emailOrderTemplate(o, 'shipped');
+      sendSimulatedEmail({
+        to: o.email, subject: tpl.subject, body: tpl.body,
+        orderId: o.id, template: 'order-shipped', showPreview: false
+      });
+    }
+  }
+}
+function emailOrder(id){
+  const o = DB.orders.find(x=>x.id===id);
+  if(!o) return;
+  if(!o.email){ toast('این سفارش ایمیل ندارد','error'); return; }
+  const tpl = emailOrderTemplate(o, 'confirmed');
+  sendSimulatedEmail({
+    to: o.email, subject: tpl.subject, body: tpl.body,
+    orderId: o.id, template: 'manual-resend', showPreview: true
+  });
+  toast('ایمیل ارسال شد ✅','success');
+}
+
+function exportOrdersCSV(){
+  const filtered = getFilteredOrders();
+  if(!filtered.length){ toast('سفارشی برای خروجی وجود ندارد','error'); return; }
+  const statusMap = { pending:'در انتظار', shipped:'ارسال شده', completed:'تکمیل شده', cancelled:'لغو شده' };
+  const headers = ['شناسه','مشتری','تلفن','ایمیل','آدرس','تعداد اقلام','مبلغ (تومان)','روش پرداخت','وضعیت','تاریخ'];
+  const rows = filtered.map(o=>[
+    o.id, o.customer, o.phone, o.email||'', o.address||'',
+    (o.items?.reduce((s,i)=>s+i.qty,0)||0),
+    o.total,
+    o.method==='online'?'آنلاین':'در محل',
+    statusMap[o.status]||o.status,
+    o.date
+  ]);
+  const csvEscape = v => {
+    const s = String(v??'');
+    return /[",\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s;
+  };
+  const lines = [headers, ...rows].map(r=>r.map(csvEscape).join(','));
+  const csv = '\uFEFF' + lines.join('\r\n');
+  download(`orders_${Date.now()}.csv`, csv, 'text/csv');
+  toast(`${toFa(filtered.length)} سفارش خروجی شد ✅`,'success');
+}
+
+/* ========================================================================
+   Admin — Emails
+   ======================================================================== */
+function adminEmails(){
+  const emails = DB.emails || [];
+  const unread = emails.filter(e=>e.unread).length;
+  return `${adminHeaderHTML('ایمیل‌ها',`${toFa(emails.length)} ایمیل — ${toFa(unread)} خوانده‌نشده`)}
+  <div class="panel">
+    <div class="panel-head">
+      <div><h2>صندوق ایمیل‌های شبیه‌سازی‌شده</h2>
+        <p>تمام ایمیل‌های ارسالی از سیستم در اینجا ذخیره می‌شوند</p></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="openEmailModal()">
+          <i class="bi bi-send"></i> ارسال ایمیل جدید</button>
+        ${emails.length?`<button class="btn btn-ghost btn-sm" onclick="clearAllEmails()">
+          <i class="bi bi-trash"></i> پاک کردن همه</button>`:''}
+      </div>
+    </div>
+    ${emails.length ? emails.map(e=>`
+      <div class="email-item ${e.unread?'unread':''}" onclick="viewEmail('${e.id}')">
+        <div class="email-meta">
+          <strong>${e.unread?'🔵 ':''}${escapeHTML(e.subject)}</strong>
+          <small>به: ${escapeHTML(e.to)}</small>
+          <small>${escapeHTML(e.sentAt)} ${e.template?` — <span class="badge badge-blue" style="font-size:10px;padding:1px 8px">${escapeHTML(e.template)}</span>`:''}</small>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteEmail('${e.id}')">
+          <i class="bi bi-trash"></i></button>
+      </div>
+    `).join('') : `<div class="empty">
+      <i class="bi bi-envelope-open"></i>
+      <h3>هیچ ایمیلی ارسال نشده</h3>
+      <p>هنگام ثبت سفارش یا عضویت در خبرنامه، ایمیل‌ها اینجا نمایش داده می‌شوند.</p>
+      <button class="btn btn-primary" style="margin-top:16px" onclick="openEmailModal()">
+        <i class="bi bi-send"></i> ارسال ایمیل جدید</button>
+    </div>`}
+  </div>`;
+}
+function clearAllEmails(){
+  if(!confirm('همه ایمیل‌ها حذف شوند؟')) return;
+  DB.emails = []; saveDB();
+  toast('همه ایمیل‌ها حذف شد','success'); render();
+}
+
+/* ========================================================================
+   Admin — Users
+   ======================================================================== */
+function adminUsers(){
+  const w = canWrite('users');
+  return `${adminHeaderHTML('کاربران',`${toFa(DB.users.length)} کاربر`)}
+  <div class="panel">
+    <div class="panel-head">
+      <div><h2>مدیریت کاربران</h2>
+        <p>نقش‌ها: مدیر کل، نویسنده، ناظر</p></div>
+      ${w?`<a href="#/admin/users/new" class="btn btn-primary">
+        <i class="bi bi-person-plus"></i> کاربر جدید</a>`:''}
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>کاربر</th><th>نام کاربری</th><th>ایمیل</th><th>نقش</th><th>وضعیت</th>${w?'<th>عملیات</th>':''}</tr></thead>
+      <tbody>${DB.users.map(u=>`<tr>
+        <td><div class="table-product">
+          <div class="admin-user-avatar" style="width:38px;height:38px;font-size:15px">${escapeHTML(u.fullName.charAt(0))}</div>
+          <div><div style="font-weight:700">${escapeHTML(u.fullName)}</div>
+            <div style="font-size:11px;color:var(--muted)">${escapeHTML(u.createdAt)}</div></div>
+        </div></td>
+        <td><code>${escapeHTML(u.username)}</code></td>
+        <td>${escapeHTML(u.email||'—')}</td>
+        <td><span class="role-badge role-${u.role}">
+          <i class="bi bi-shield-${u.role==='admin'?'fill-check':'check'}"></i>
+          ${ROLES[u.role].label}</span></td>
+        <td>${u.active?'<span class="badge badge-green">فعال</span>':'<span class="badge badge-red">غیرفعال</span>'}</td>
+        ${w?`<td><div class="row-actions">
+          <a href="#/admin/users/${u.id}" class="btn btn-ghost btn-sm"><i class="bi bi-pencil"></i></a>
+          ${u.id!==currentUser().id?`<button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">
+            <i class="bi bi-trash"></i></button>`:''}
+        </div></td>`:''}
+      </tr>`).join('')}</tbody>
+    </table></div>
+  </div>`;
+}
+function adminUserForm(id){
+  if(!canWrite('users')){ navigate('/admin/users'); return ''; }
+  const isEdit = !!id;
+  const u = isEdit ? DB.users.find(x=>x.id===id) : {
+    username:'', password:'', fullName:'', email:'', role:'editor', active:true
+  };
+  if(isEdit && !u){ navigate('/admin/users'); return ''; }
+  return `${adminHeaderHTML(isEdit?'ویرایش کاربر':'کاربر جدید', isEdit?u.fullName:'افزودن کاربر')}
+  <div class="panel"><form onsubmit="event.preventDefault();saveUser('${id||''}')">
+    <div class="form-row">
+      <div class="form-group"><label>نام کامل *</label>
+        <input class="input" id="uFullName" required value="${escapeHTML(u.fullName)}"></div>
+      <div class="form-group"><label>نام کاربری *</label>
+        <input class="input" id="uUsername" required value="${escapeHTML(u.username)}"
+          ${isEdit?'disabled':''}></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>رمز عبور *</label>
+        <input class="input" id="uPassword" required value="${escapeHTML(u.password)}"></div>
+      <div class="form-group"><label>ایمیل</label>
+        <input class="input" id="uEmail" type="email" value="${escapeHTML(u.email||'')}"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>نقش کاربری *</label>
+        <select class="select" id="uRole">
+          <option value="admin"  ${u.role==='admin'?'selected':''}>مدیر کل</option>
+          <option value="editor" ${u.role==='editor'?'selected':''}>نویسنده</option>
+          <option value="viewer" ${u.role==='viewer'?'selected':''}>ناظر</option>
+        </select></div>
+      <div class="form-group"><label>وضعیت</label>
+        <select class="select" id="uActive">
+          <option value="1" ${u.active?'selected':''}>فعال</option>
+          <option value="0" ${!u.active?'selected':''}>غیرفعال</option>
+        </select></div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> ذخیره</button>
+      <a href="#/admin/users" class="btn btn-outline">انصراف</a>
+    </div>
+  </form></div>`;
+}
+function saveUser(id){
+  if(!canWrite('users')) return;
+  const fullName = $('#uFullName').value.trim();
+  const password = $('#uPassword').value;
+  const email = $('#uEmail').value.trim();
+  const role = $('#uRole').value;
+  const active = $('#uActive').value === '1';
+  if(!fullName || !password){ toast('نام و رمز الزامی است','error'); return; }
+  if(id){
+    const u = DB.users.find(x=>x.id===id); if(!u) return;
+    u.fullName = fullName; u.password = password; u.email = email;
+    u.role = role; u.active = active;
+    toast('کاربر ویرایش شد','success');
+  } else {
+    const username = $('#uUsername').value.trim();
+    if(!username){ toast('نام کاربری الزامی است','error'); return; }
+    if(DB.users.find(x=>x.username===username)){ toast('این نام کاربری قبلاً استفاده شده','error'); return; }
+    DB.users.push({ id: uid('u'), username, password, fullName, email, role, active, createdAt: todayJalali() });
+    toast('کاربر جدید اضافه شد','success');
+  }
+  createBackup('ذخیره کاربر', false);
+  saveDB(); navigate('/admin/users'); render();
+}
+function deleteUser(id){
+  if(!canWrite('users')) return;
+  if(id === currentUser().id){ toast('نمی‌توانید خودتان را حذف کنید','error'); return; }
+  if(!confirm('این کاربر حذف شود؟')) return;
+  DB.users = DB.users.filter(x=>x.id!==id);
+  createBackup('حذف کاربر', false);
+  saveDB(); toast('حذف شد','success'); render();
+}
+
+/* ========================================================================
+   Admin — Backups (with cron log)
+   ======================================================================== */
+function adminBackups(){
+  const lastRun = DB.cronState.lastCheck;
+  return `${adminHeaderHTML('نسخه‌ها و بکاپ','مدیریت نسخه‌های پشتیبان و کرون')}
+  <div class="panel">
+    <div class="panel-head">
+      <div><h2>نسخه‌های پشتیبان</h2>
+        <p>حداکثر ۱۰ نسخه اخیر نگه‌داری می‌شوند</p></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="manualBackup()">
+          <i class="bi bi-plus-circle"></i> بکاپ دستی</button>
+        <button class="btn btn-success" onclick="downloadBackup()">
+          <i class="bi bi-download"></i> دانلود فایل</button>
+        <button class="btn btn-ghost" onclick="uploadBackupFile()">
+          <i class="bi bi-upload"></i> بازیابی</button>
+      </div>
+    </div>
+
+    <div style="background:var(--bg);padding:18px;border-radius:10px;border:1px solid var(--border);margin-bottom:20px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+          <input type="checkbox" id="autoBakToggle" ${DB.settings.autoBackup?'checked':''}
+            onchange="toggleAutoBackup(this.checked)">
+          <span style="font-weight:700">⏰ بکاپ خودکار روزانه (کرون پس‌زمینه)</span>
+        </label>
+        <div class="cron-status" data-cron-status>
+          <span class="cron-dot"></span><span>فعال</span>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)">
+        <div><strong>وضعیت کرون:</strong> هر ۶۰ ثانیه بررسی می‌شود — تعداد اجراها: ${toFa(DB.cronState.runCount||0)}</div>
+        <div><strong>آخرین بررسی:</strong> ${lastRun ? toFa(new Date(lastRun).toLocaleString('fa-IR')) : 'هنوز اجرا نشده'}</div>
+        <div><strong>آخرین بکاپ خودکار:</strong> ${DB.lastAutoBackup ? toFa(new Date(DB.lastAutoBackup).toLocaleString('fa-IR')) : 'هرگز'}</div>
+      </div>
+    </div>
+
+    ${DB.backups.length?DB.backups.map(b=>`
+      <div class="backup-item">
+        <div class="backup-meta">
+          <strong>${b.isAuto?'<span class="auto-badge">خودکار</span>':''}${escapeHTML(b.label)}</strong>
+          <small>
+            <i class="bi bi-calendar3"></i> ${escapeHTML(b.date)} — ${escapeHTML(b.time)} |
+            <i class="bi bi-hdd"></i> ${toFa((b.size/1024).toFixed(1))} KB |
+            ${toFa(b.counts.products)} محصول، ${toFa(b.counts.orders)} سفارش، ${toFa(b.counts.posts)} مقاله
+          </small>
+        </div>
+        <div class="backup-actions">
+          <button class="btn btn-ghost btn-sm" onclick="restoreBackup('${b.id}')">
+            <i class="bi bi-arrow-counterclockwise"></i> بازگردانی</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteBackup('${b.id}')">
+            <i class="bi bi-trash"></i></button>
+        </div>
+      </div>`).join(''):`<div class="empty">
+        <i class="bi bi-clock-history"></i>
+        <h3>هیچ نسخه‌ای وجود ندارد</h3>
+        <button class="btn btn-primary" style="margin-top:16px" onclick="manualBackup()">
+          <i class="bi bi-plus-circle"></i> بکاپ دستی</button>
+      </div>`}
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div><h2>📋 لاگ کرون پس‌زمینه</h2>
+        <p>آخرین فعالیت‌های خودکار سیستم</p></div>
+    </div>
+    ${(DB.cronLog||[]).length ? DB.cronLog.slice(0,20).map(l=>`
+      <div class="cron-log-item">
+        <span>${escapeHTML(l.msg)}</span>
+        <span class="cl-time">${escapeHTML(l.time)}</span>
+      </div>`).join('') : `<div class="empty"><i class="bi bi-list-check"></i>
+        <h3>لاگی وجود ندارد</h3></div>`}
+  </div>`;
+}
+function manualBackup(){
+  createBackup('بکاپ دستی', false);
+  saveDB(); toast('بکاپ ایجاد شد ✅','success'); render();
+}
+function toggleAutoBackup(enabled){
+  DB.settings.autoBackup = enabled;
+  saveDB();
+  toast(enabled?'کرون فعال شد':'کرون غیرفعال شد','success');
+  render();
+}
+function downloadBackup(){
+  const data = { version:'4.0', exportedAt:new Date().toISOString(), db:DB };
+  download(`the8shop-backup-${Date.now()}.json`, JSON.stringify(data, null, 2), 'application/json');
+  toast('فایل بکاپ دانلود شد ✅','success');
+}
+function uploadBackupFile(){
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = '.json';
+  input.onchange = e => {
+    const file = e.target.files[0]; if(!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try{
+        const parsed = JSON.parse(ev.target.result);
+        const newDB = parsed.db || parsed;
+        if(!newDB.products || !newDB.users){ toast('فایل نامعتبر است','error'); return; }
+        if(!confirm('فایل بکاپ بارگذاری شود؟')) return;
+        DB = newDB;
+        if(!DB.backups) DB.backups = [];
+        if(!DB.emails) DB.emails = [];
+        if(!DB.cronLog) DB.cronLog = [];
+        saveDB();
+        toast('بازگردانی موفق ✅','success');
+        render();
+      }catch{ toast('خطا در خواندن فایل','error'); }
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+
+/* ========================================================================
+   Admin — Settings
+   ======================================================================== */
+function adminSettings(){
+  if(!canWrite('settings')){
+    return `${adminHeaderHTML('تنظیمات','دسترسی محدود')}
+    <div class="panel"><div class="empty"><i class="bi bi-shield-x"></i>
+      <h3>دسترسی ندارید</h3></div></div>`;
+  }
+  const s = DB.settings;
+  return `${adminHeaderHTML('تنظیمات','تنظیمات کلی سایت')}
+  <div class="panel"><form onsubmit="event.preventDefault();saveSettings()">
+    <h2 style="margin-bottom:20px;font-size:16px">اطلاعات فروشگاه</h2>
+    <div class="form-row">
+      <div class="form-group"><label>نام سایت</label>
+        <input class="input" id="sSiteName" value="${escapeHTML(s.siteName)}"></div>
+      <div class="form-group"><label>شعار</label>
+        <input class="input" id="sTagline" value="${escapeHTML(s.tagline)}"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>تلفن</label>
+        <input class="input" id="sPhone" value="${escapeHTML(s.phone)}"></div>
+      <div class="form-group"><label>ایمیل</label>
+        <input class="input" id="sEmail" value="${escapeHTML(s.email)}"></div>
+    </div>
+    <div class="form-group"><label>آدرس</label>
+      <input class="input" id="sAddress" value="${escapeHTML(s.address)}"></div>
+    <div class="form-group"><label>ایمیل فرستنده (سیستم)</label>
+      <input class="input" id="sEmailSender" value="${escapeHTML(s.emailSender||'no-reply@the8shop.ir')}">
+      <div class="form-hint">این ایمیل به‌عنوان فرستنده در ایمیل‌های شبیه‌سازی‌شده نمایش داده می‌شود</div></div>
+    <h2 style="margin:28px 0 20px;font-size:16px">شبکه‌های اجتماعی</h2>
+    <div class="form-row">
+      <div class="form-group"><label>اینستاگرام</label>
+        <input class="input" id="sInstagram" value="${escapeHTML(s.instagram)}"></div>
+      <div class="form-group"><label>تلگرام</label>
+        <input class="input" id="sTelegram" value="${escapeHTML(s.telegram)}"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>واتساپ</label>
+        <input class="input" id="sWhatsapp" value="${escapeHTML(s.whatsapp)}"></div>
+      <div class="form-group"><label>لینکدین</label>
+        <input class="input" id="sLinkedin" value="${escapeHTML(s.linkedin)}"></div>
+    </div>
+    <div class="form-group"><label>کپی‌رایت</label>
+      <input class="input" id="sCopyright" value="${escapeHTML(s.copyright)}"></div>
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-check-lg"></i> ذخیره</button>
+    </div>
+  </form></div>`;
+}
+function saveSettings(){
+  if(!canWrite('settings')) return;
+  const s = DB.settings;
+  s.siteName = $('#sSiteName').value.trim();
+  s.tagline = $('#sTagline').value.trim();
+  s.phone = $('#sPhone').value.trim();
+  s.email = $('#sEmail').value.trim();
+  s.address = $('#sAddress').value.trim();
+  s.emailSender = $('#sEmailSender').value.trim();
+  s.instagram = $('#sInstagram').value.trim();
+  s.telegram = $('#sTelegram').value.trim();
+  s.whatsapp = $('#sWhatsapp').value.trim();
+  s.linkedin = $('#sLinkedin').value.trim();
+  s.copyright = $('#sCopyright').value.trim();
+  createBackup('ذخیره تنظیمات', false);
+  saveDB(); toast('ذخیره شد','success'); render();
+}
+
+/* ========================================================================
+   Init
+   ======================================================================== */
+window.addEventListener('load', ()=>{
+  document.addEventListener('scroll', ()=>{
+    const btn = $('#backToTop');
+    if(btn) btn.classList.toggle('show', window.scrollY > 400);
+  }, { passive:true });
+  startBackgroundCron();
+  render();
+  updateEmailCount();
+});
+if(!location.hash) location.hash = '#/';
+</script>
+</body>
+</html>
